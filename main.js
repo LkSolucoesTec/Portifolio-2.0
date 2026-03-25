@@ -123,25 +123,27 @@ window.addEventListener("load", () => {
 
             // A MÁGICA: Galeria Horizontal Corrigida
             const track = document.querySelector(".gallery-track");
-            let sections = gsap.utils.toArray(".gallery-slide");
+                let sections = gsap.utils.toArray(".gallery-slide");
 
-            if (track && sections.length > 0) {
-                gsap.to(track, {
-                    // Move a pista inteira com base no tamanho exato dela
-                    x: () => -(track.scrollWidth - window.innerWidth), 
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: "#lks-gallery-container",
-                        pin: true,
-                        scrub: 1,
-                        start: "top top",
-                        // Termina a animação exatamente quando a pista acaba
-                        end: () => "+=" + (track.scrollWidth - window.innerWidth),
-                        invalidateOnRefresh: true,
-                        anticipatePin: 1
-                    }
-                });
-            }
+                if (track && sections.length > 0) {
+                    
+                    // Conta quantos slides temos que mover (Total - 1)
+                    const moveAmount = sections.length - 1;
+
+                    gsap.to(track, {
+                        // Move a pista exatemente "X" vezes a largura da tela!
+                        x: () => -(window.innerWidth * moveAmount), 
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: "#lks-gallery-container",
+                            pin: true,
+                            scrub: 1,
+                            // O scroll dura exatamente "X" larguras de tela
+                            end: () => "+=" + (window.innerWidth * moveAmount),
+                            invalidateOnRefresh: true
+                        }
+                    });
+                }
 
             // Motor de Skew (Hero e Fitas)
             function scrollLoop() {
@@ -195,13 +197,16 @@ window.addEventListener("load", () => {
     const glareFront = document.querySelector('.card-front .card-glare');
     const glareBack = document.querySelector('.card-back .card-glare');
 
-    let isAnimating = false; // TRAVA DE SEGURANÇA LKS
+    let isAnimating = false; // Trava LKS
 
     if(cardStage && card) {
         
-        // Tilt 3D com o Mouse
+        // 🛑 O SEGREDO: Mata a transição do CSS para o GSAP poder trabalhar livre sem travar
+        card.style.transition = "none";
+
+        // 1. Tilt 3D com o Mouse
         cardStage.addEventListener('mousemove', (e) => {
-            if (isAnimating) return; // Se a carta estiver girando, CANCELA o tilt
+            if (isAnimating) return; // Se a carta estiver girando, o mouse não interfere
 
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left; const y = e.clientY - rect.top;
@@ -224,32 +229,39 @@ window.addEventListener("load", () => {
             if(targetGlare) targetGlare.style.background = `linear-gradient(105deg, transparent ${moveX - 20}%, rgba(0, 230, 255, 0.4) ${moveX}%, rgba(255, 0, 255, 0.4) ${moveX + 20}%, transparent ${moveX + 40}%)`;
         });
 
-        // Tira o Mouse
+        // 2. Tira o Mouse (Reseta a posição)
         cardStage.addEventListener('mouseleave', () => {
             if (isAnimating) return;
             gsap.to(card, {
                 rotateX: 0,
                 rotateY: card.classList.contains('flipped') ? 180 : 0,
                 scale: 1,
+                transformPerspective: 2000,
                 duration: 0.5,
                 ease: "power2.out",
                 overwrite: "auto"
             });
         });
 
-        // O Clique (Giro Mestre)
+        // 3. O Clique (Giro Mestre)
         card.addEventListener('click', () => {
-            isAnimating = true; // Aciona a Trava LKS
-            card.classList.toggle('flipped');
+            if (isAnimating) return; // Previne bugar se o usuário clicar 2x rápido
+            isAnimating = true; // Aciona a Trava
             
+            // Alterna a classe para ativar a barra de progresso do CSS (Verso)
+            card.classList.toggle('flipped');
+            const isFlipped = card.classList.contains('flipped');
+            
+            // GSAP faz o giro 3D perfeito e limpo
             gsap.to(card, {
                 duration: 0.8,
-                rotationY: card.classList.contains('flipped') ? 180 : 0,
+                rotationY: isFlipped ? 180 : 0,
                 rotationX: 0,
                 scale: 1,
+                transformPerspective: 2000,
                 ease: "power2.inOut",
                 onComplete: () => {
-                    isAnimating = false; // Destrava após o giro
+                    isAnimating = false; // Destrava após o giro terminar
                 }
             });
         });

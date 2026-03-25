@@ -197,32 +197,24 @@ body, html {
 /* ========================================== */
 /* A GALERIA INFINITA (Scroll Horizontal - DESKTOP) */
 /* ========================================== */
-#lks-gallery-container { 
-    width: 100vw; 
-    height: 100vh; 
-    position: relative; 
-    overflow: hidden; 
-    z-index: 5;
-}
 
+#lks-gallery-container { 
+    width: 100vw; height: 100vh; position: relative; overflow: hidden; 
+    pointer-events: none !important; 
+}
 .gallery-track { 
     display: flex; 
-    flex-wrap: nowrap; /* MÁGICA 1: Proíbe os cards de caírem para a linha de baixo */
-    width: max-content; /* Deixa o GSAP calcular o tamanho exato da pista */
-    height: 100vh; 
+    width: 500vw; 
+    height: 100%; 
+    pointer-events: none; 
+    flex-wrap: nowrap; /* MÁGICA 1: ADICIONE ISSO */
 }
-
 .gallery-slide { 
     width: 100vw; 
     height: 100vh; 
     display: flex; 
-    flex-direction: row; /* Força Imagem na esquerda, Texto na direita */
-    align-items: center; 
-    justify-content: center; 
-    gap: 5vw; 
-    padding: 0 10vw; 
-    position: relative; 
-    flex-shrink: 0; /* MÁGICA 2: Proíbe o navegador de esmagar o seu design */
+    align-items: center; justify-content: center; gap: 5vw; padding: 0 10vw; position: relative; pointer-events: none; 
+    flex-shrink: 0; /* MÁGICA 2: ADICIONE ISSO */
 }
 
 .slide-text { width: 40vw; max-width: 600px; }
