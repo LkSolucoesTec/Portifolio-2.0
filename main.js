@@ -121,18 +121,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
             }
 
-            // Galeria Horizontal
-            let sections = gsap.utils.toArray(".gallery-slide");
+            // --- A MÁGICA: Galeria Horizontal Corrigida ---
             const track = document.querySelector(".gallery-track");
-            if (sections.length > 0 && track) {
-                gsap.to(sections, {
-                    xPercent: -100 * (sections.length - 1),
+            let sections = gsap.utils.toArray(".gallery-slide");
+
+            if (track && sections.length > 0) {
+                gsap.to(track, {
+                    // Move a pista inteira com base no tamanho exato dela
+                    x: () => -(track.scrollWidth - window.innerWidth), 
                     ease: "none",
                     scrollTrigger: {
                         trigger: "#lks-gallery-container",
                         pin: true,
                         scrub: 1,
-                        end: () => "+=" + (track.offsetWidth * 0.8) 
+                        // Termina a animação exatamente quando a pista acaba
+                        end: () => "+=" + (track.scrollWidth - window.innerWidth),
+                        invalidateOnRefresh: true
                     }
                 });
             }
@@ -182,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
+    
     // ==========================================
     // 5. CARTA POKÉMON (FLIP E TILT 3D)
     // ==========================================
