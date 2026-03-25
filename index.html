@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKS Soluções Tecnológicas | Futuro da Tecnologia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+      }
+    }
+    </script>
+
+
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div id="cursor"></div>
+
+    
+    <nav class="brutal-nav">
+        <a href="#" class="nav-logo magnetic" style="text-decoration: none;">LKS SOL TECH</a>
+        <div class="menu-toggle"><span></span></div>
+        
+        <ul class="nav-menu">
+            <li><a href="#" class="nav-link magnetic" data-text="HOME">HOME</a></li>
+            
+            <li><a href="#lks-gallery-container" class="nav-link magnetic" data-text="SOBRE">SOBRE</a></li>
+            
+            <li><a href="#portfolio-transition" class="nav-link magnetic" data-text="PORTFÓLIO">PORTFÓLIO</a></li>
+            
+            <li><a href="#contato-final" class="nav-link magnetic" data-text="CONTATO">CONTATO</a></li>
+        </ul>
+        
+        <a href="#contato-final" class="cta-btn magnetic" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+            <span>FALE CONOSCO</span>
+        </a>
+    </nav>
+
+    <canvas id="neural-network-canvas"></canvas>
+
+    <div id="scroll-content">
+        
+        <section class="hero">
+            <div class="hero-title-container">
+                <h1>
+                    <div class="word">
+                        <span class="char">O</span> <span class="char">F</span><span class="char">U</span><span class="char">T</span><span class="char">U</span><span class="char">R</span><span class="char">O</span>
+                    </div>
+                    
+                    <div class="word da">da</div><br>
+                    
+                    <div class="word">
+                        <span class="char">T</span><span class="char">E</span><span class="char">C</span><span class="char">N</span><span class="char">O</span><span class="char">L</span><span class="char">O</span><span class="char">G</span><span class="char">I</span><span class="char">A</span>
+                    </div>
+                </h1>
+            </div>
+
+            <div class="tape-system">
+                
+                <div class="tape-wrapper" id="tape-left-right">
+                    <div class="tape-track track-left">
+                        <span class="tape-text">✦ AUTOMAÇÃO DE PROCESSOS ✦ AGENTES DE INTELIGÊNCIA ARTIFICIAL ✦ MICRO SAAS ✦ WEB DESIGN DE ELITE </span>
+                        <span class="tape-text">✦ AUTOMAÇÃO DE PROCESSOS ✦ AGENTES DE INTELIGÊNCIA ARTIFICIAL ✦ MICRO SAAS ✦ WEB DESIGN DE ELITE </span>
+                        <span class="tape-text">✦ AUTOMAÇÃO DE PROCESSOS ✦ AGENTES DE INTELIGÊNCIA ARTIFICIAL ✦ MICRO SAAS ✦ WEB DESIGN DE ELITE </span>
+                        <span class="tape-text">✦ AUTOMAÇÃO DE PROCESSOS ✦ AGENTES DE INTELIGÊNCIA ARTIFICIAL ✦ MICRO SAAS ✦ WEB DESIGN DE ELITE </span>
+                    </div>
+                </div>
+
+                <div class="tape-wrapper" id="tape-right-left">
+                    <div class="tape-track track-right">
+                        <span class="tape-text">✦ PURIST CODE ✦ BRUTALIST ARCHITECTURE ✦ OPERATIONAL EXCELLENCE ✦ MACHINE LEARNING </span>
+                        <span class="tape-text">✦ PURIST CODE ✦ BRUTALIST ARCHITECTURE ✦ OPERATIONAL EXCELLENCE ✦ MACHINE LEARNING </span>
+                        <span class="tape-text">✦ PURIST CODE ✦ BRUTALIST ARCHITECTURE ✦ OPERATIONAL EXCELLENCE ✦ MACHINE LEARNING </span>
+                        <span class="tape-text">✦ PURIST CODE ✦ BRUTALIST ARCHITECTURE ✦ OPERATIONAL EXCELLENCE ✦ MACHINE LEARNING </span>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="section-dark manifesto-section">
+            <p class="big-text">
+                A LKS SOLUÇÕES TECNOLÓGICAS NÃO É UMA AGÊNCIA TRADICIONAL. SOMOS UMA <span>FUNDIÇÃO DE TECNOLOGIA AVANÇADA.</span> NOSSO ECOSSISTEMA UNE <span>DESIGN DE ELITE</span>, <span>INTELIGÊNCIA ARTIFICIAL</span> E AUTOMAÇÃO PARA FORJAR MOTORES DIGITAIS QUE GARANTEM A <span>SOBERANIA</span> E A ESCALABILIDADE DO SEU NEGÓCIO NO AMBIENTE DIGITAL.
+            </p>
+        </section>
+
+        <section class="section-dark transition-section">
+            <p class="big-text transition-text">
+                CONHEÇA NOSSOS<br>
+                <span>SERVIÇOS</span>
+            </p>
+            <div class="down-arrow-hint">↓</div>
+        </section>
+    </div>
+
+    <main id="lks-gallery-container">
+        <div class="gallery-track">
+
+            <section class="gallery-slide">
+                <div class="card card-type-01 magnetic">
+                    <img src="assets/web designer.png" alt="Processos Automatizados" crossorigin="anonymous">
+                </div>
+                <div class="slide-text">
+                    <span class="catalogue-number">01 / Arquitetura Front-end</span>
+                    <h2 class="slide-title">Web Design & <br><span class="text-outline">Performance</span></h2>
+                    <p class="slide-desc">Criamos páginas digitais de luxo, desenvolvidas para transmitir sofisticação e autoridade, com foco absoluto em alta conversão. Utilizamos modelos 3D interativos, animações envolventes e código puro, garantindo carregamento instantâneo e uma experiência imersiva que conecta marcas a pessoas de forma única e memorável.</p>
+                </div>
+            </section>
+
+            <section class="gallery-slide">
+                <div class="card card-type-01 magnetic">
+                    <img src="assets/automação.png" alt="Agentes Inteligentes" crossorigin="anonymous">
+                </div>
+                <div class="slide-text">
+                    <span class="catalogue-number">02 / Otimização de Fluxos</span>
+                    <h2 class="slide-title">Automação de <br><span class="text-outline">Processos</span></h2>
+                    <p class="slide-desc">Sua empresa rodando no piloto automático 24/7. Criamos fluxos de dados invisíveis que eliminam falhas humanas e reduzem custos operacionais drasticamente.</p>
+                </div>
+            </section>
+
+            <section class="gallery-slide">
+                <div class="card card-type-01 magnetic">
+                    <img src="assets/agente ia.png" alt="SaaS & Data Visualization" crossorigin="anonymous">
+                </div>
+                <div class="slide-text">
+                    <span class="catalogue-number">03 / Machine Learning</span>
+                    <h2 class="slide-title">Agentes de <br><span class="text-highlight">I.A.</span></h2>
+                    <p class="slide-desc">Mentes artificiais treinadas exclusivamente com seus dados. Sistemas capazes de realizar triagens complexas e tomar decisões cirúrgicas em frações de segundo.</p>
+                </div>
+            </section>
+
+            <section class="gallery-slide">
+                <div class="card card-type-01 magnetic">
+                    <img src="assets/saas.png" alt="SaaS & Data Visualization" crossorigin="anonymous">
+                </div>
+                <div class="slide-text">
+                    <span class="catalogue-number">04 / Engenharia de Produto</span>
+                    <h2 class="slide-title">Micro <span class="text-outline">SaaS</span></h2>
+                    <p class="slide-desc">Sua ideia transformada em um ativo escalável. Desenvolvemos softwares prontos para gerar receita recorrente e suportar milhares de usuários sem gargalos.</p>
+                </div>
+            </section>
+
+            <section class="gallery-slide founder-slide">
+                <div class="pokemon-card-stage">
+                    <div class="pokemon-card" id="founder-card">
+                        
+                        <div class="card-face card-front frame-glass">
+                            <div class="card-glare"></div>
+                            
+                            <div class="card-header">
+                                <span class="card-type">BASIC / TRAINER</span>
+                                <span class="card-hp">HP 999</span>
+                            </div>
+                            
+                            <div class="card-image-wrapper">
+                                <img src="assets/perfil.jpg" alt="André Lucas" class="founder-photo">
+                            </div>
+                            
+                            <div class="card-body-front">
+                                <h3>André Lucas</h3>
+                                <h4 class="hightlight">CEO & FUNDADOR</h4>
+                            </div>
+                            
+                            <div class="card-flip-hint">
+                                <span>CLIQUE PARA REVELAR ATRIBUTOS ↻</span>
+                            </div>
+                        </div>
+
+                        <div class="card-face card-back frame-glass">
+                            <div class="card-glare"></div>
+                            
+                            <div class="card-inner-back">
+                                <div class="card-header">
+                                    <span class="card-type">STATISTICS OS</span>
+                                </div>
+                                
+                                <h3 class="slide-title text-highlight" style="font-size: 2.5rem;">Atributos <br><span class="text-outline">Técnicos</span></h3>
+                                
+                                <div class="skills-grid">
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>Full-Stack Purista</span><span>MAX</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>🧠 I.A. Generativa</span><span>90%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>SEO SEMANTIC</span><span>85%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>⚙️ Automação (No-Code)</span><span>80%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>Artificial intelligence</span><span>75%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info"><span>Cybersecurity</span><span>70%</span></div>
+                                        <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="card-flavor-text">"A tecnologia é a forja onde moldamos o futuro dos negócios."</div>
+                                
+                                <div class="card-flip-hint">
+                                    <span>CLIQUE PARA RETORNAR ↻</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="slide-text">
+                    <span class="catalogue-number">05 / Liderança Técnica</span>
+                    <h2 class="slide-title">O Mestre da <br><span class="text-highlight">Forja</span></h2>
+                    <p class="slide-desc">Inspecione os atributos do desenvolvedor chefe. Na LKS Soluções Tecnológicas, a arquitetura é forjada na intersecção entre o código puro, o design brutalista e a inteligência de máquina.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <section id="portfolio-transition">
+        <div id="magic"></div>
+        
+        <div class="playground">
+            <div class="bottomPosition">
+                <h1 class="special">PORTFÓLIO <br><span class="minText">Obras Selecionadas</span></h1>
+                
+                <a href="#portfolio-section" class="scroll-hint-game magnetic">
+                    <span>ACESSAR PROJETOS</span>
+                    <span class="scroll-arrow" style="display: block; margin-top: 10px;">↓</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio-section" class="lks-portfolio-engine">
+        
+        <div class="portfolio-sidebar">
+            <div class="nav-thumb active" data-target="0">
+                <img src="assets/RR IMOBILIARIA LUXO.png" alt="RR Imóveis">
+                <div class="thumb-border"></div>
+            </div>
+            <div class="nav-thumb" data-target="1">
+                <img src="assets/helpdesk.png" alt="HelpDesk IA">
+                <div class="thumb-border"></div>
+            </div>
+            <div class="nav-thumb" data-target="2">
+                <img src="assets/Jukio Adv.png" alt="Dr. Julio Ligaboi">
+                <div class="thumb-border"></div>
+            </div>
+            <div class="nav-thumb" data-target="3">
+                <img src="assets/saas lovable.png" alt="Micro SaaS">
+                <div class="thumb-border"></div>
+            </div>
+        </div>
+
+        <div class="portfolio-main">
+            
+            <div class="portfolio-slide active" data-color="#00e6ff" data-index="0">
+                <div class="slide-bg">
+                    <img src="assets/RR IMOBILIARIA LUXO.png" alt="Background">
+                    <div class="bg-overlay"></div>
+                </div>
+                
+                <div class="slide-content">
+                    <div class="project-header">
+                        <h5>PLATAFORMA & BACKEND</h5>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6ff'><path d='M12 2L2 22h20L12 2z'/></svg>" class="gl-icon" alt="icon"/>
+                    </div>
+                    
+                    <h1 class="project-title">RR Imóveis</h1>
+                    
+                    <div class="tech-box">
+                        <div class="tech-box-icon">
+                            <span style="font-size: 24px;">🏢</span>
+                        </div>
+                        <div class="tech-box-content">
+                            <h5>SISTEMA IMOBILIÁRIO</h5>
+                            <p>Plataforma completa de gestão imobiliária e exibição de propriedades. Arquitetura robusta com backend alimentado pelo Supabase, garantindo performance de banco de dados e escala para milhares de acessos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-stack-icons">
+                        <div class="stack-item"><p>React</p></div>
+                        <div class="stack-item"><p>Supabase</p></div>
+                        <div class="stack-item"><p>Node</p></div>
+                        <div class="stack-item"><p>API</p></div>
+                    </div>
+                    
+                    <a href="#" class="view-project-btn magnetic"><span>ACESSAR SISTEMA</span></a>
+                </div>
+            </div>
+
+            <div class="portfolio-slide" data-color="#ff00ff" data-index="1">
+                <div class="slide-bg">
+                    <img src="assets/helpdesk.png" alt="Background">
+                    <div class="bg-overlay"></div>
+                </div>
+                
+                <div class="slide-content">
+                    <div class="project-header">
+                        <h5>SISTEMA INTELIGENTE</h5>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff00ff'><rect width='18' height='18' x='3' y='3'/></svg>" class="gl-icon" alt="icon"/>
+                    </div>
+                    
+                    <h1 class="project-title">TCC</h1>
+                    
+                    <div class="tech-box">
+                        <div class="tech-box-icon">
+                            <span style="font-size: 24px;">🧠</span>
+                        </div>
+                        <div class="tech-box-content">
+                            <h5>AUTOMAÇÃO DE TRIAGEM</h5>
+                            <p>Integração de um Agente de I.A. focado em atendimento de TI. O sistema realiza triagem automática, resolve problemas primários de usuários e, caso necessário, escala e abre chamados formatados para técnicos humanos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-stack-icons">
+                        <div class="stack-item"><p>MAUI</p></div>
+                        <div class="stack-item"><p>BLAZOR</p></div>
+                        <div class="stack-item"><p>WPF</p></div>
+                        <div class="stack-item"><p>C#</p></div>
+                    </div>
+                    
+                    <a href="https://github.com/LkSolucoesTec/PIM-HelpDesk-Grupo" target="_blank" class="view-project-btn magnetic"><span>VER REPOSITÓRIO</span></a>
+                </div>
+            </div>
+
+            <div class="portfolio-slide" data-color="#EAA742" data-index="2">
+                <div class="slide-bg">
+                    <img src="assets/Jukio Adv.png" alt="Background">
+                    <div class="bg-overlay"></div>
+                </div>
+                
+                <div class="slide-content">
+                    <div class="project-header">
+                        <h5>WEB DESIGN DE AUTORIDADE</h5>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EAA742'><polygon points='12,2 22,22 2,22'/></svg>" class="gl-icon" alt="icon"/>
+                    </div>
+                    
+                    <h1 class="project-title">SITE</h1>
+                    
+                    <div class="tech-box">
+                        <div class="tech-box-icon">
+                            <span style="font-size: 24px;">⚖️</span>
+                        </div>
+                        <div class="tech-box-content">
+                            <h5>DR. JULIO LIGABOI</h5>
+                            <p>Desenvolvimento de presença digital premium para escritório de advocacia. Foco em arquitetura de informação clara, SEO técnico e design focado em transmitir confiança e alta autoridade jurídica.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-stack-icons">
+                        <div class="stack-item"><p>HTML</p></div>
+                        <div class="stack-item"><p>CSS</p></div>
+                        <div class="stack-item"><p>JS</p></div>
+                        <div class="stack-item"><p>SEO</p></div>
+                    </div>
+                    
+                    <a href="https://www.ligaboiadvocacia.com.br/" target="_blank" class="view-project-btn magnetic"><span>ACESSAR SITE</span></a>
+                </div>
+            </div>
+
+            <div class="portfolio-slide" data-color="#04BC49" data-index="3">
+                <div class="slide-bg">
+                    <img src="assets/saas lovable.png" alt="Background">
+                    <div class="bg-overlay"></div>
+                </div>
+                
+                <div class="slide-content">
+                    <div class="project-header">
+                        <h5>NO CODE</h5>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2304BC49'><circle cx='12' cy='12' r='10'/></svg>" class="gl-icon" alt="icon"/>
+                    </div>
+                    
+                    <h1 class="project-title">Domain Pro</h1>
+                    
+                    <div class="tech-box">
+                        <div class="tech-box-icon">
+                            <span style="font-size: 24px;">⚡</span>
+                        </div>
+                        <div class="tech-box-content">
+                            <h5>MICRO SAAS</h5>
+                            <p>Solução ágil construída utilizando a arquitetura Lovable. O projeto valida a capacidade de transformar regras de negócio complexas em produtos de software entregáveis rapidamente com ferramentas no-code avançadas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-stack-icons">
+                        <div class="stack-item"><p>SaaS</p></div>
+                        <div class="stack-item"><p>LowC</p></div>
+                        <div class="stack-item"><p>UI</p></div>
+                        <div class="stack-item"><p>Prod</p></div>
+                    </div>
+                    
+                    <a href="https://domain-pro-easy.lovable.app/" target="_blank" class="view-project-btn magnetic"><span>ACESSAR SAAS</span></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="archive-section">
+        <div class="archive-container">
+            <div class="archive-header text-item">
+                <h2>ARQUIVO <span class="text-muted">DE OPERAÇÕES</span></h2>
+            </div>
+
+            <div class="accordion">
+
+                <div class="accordion-item">
+                    <img src="assets/Ana andressa enngenharia.png" alt="Engenharia" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">Ana Ligaboi Eng.</h3>
+                                <h3 class="service-title alternate">Ana Ligaboi Eng.</h3>
+                            </div>
+                            <span class="service-number">01</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Landing page de alta conversão desenvolvida para o nicho de Engenharia Civil e Arquitetura. Foco em exibição de portfólio estrutural e captação de leads qualificados.</p>
+                            <ul class="feature-list">
+                                <li>✦ Web Design Responsivo</li>
+                                <li>✦ Otimização de Performance</li>
+                                <li>✦ UI/UX Corporativo</li>
+                                <li>✦ Lead Generation</li>
+                            </ul>
+                            <a href="https://ana-ligaboi-engenheira.vercel.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/PIM site.png" alt="Code" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">SITE PROJETO TCC</h3>
+                                <h3 class="service-title alternate">PIM HelpDesk site</h3>
+                            </div>
+                            <span class="service-number">02</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Site de apresentação do Projeto de Conclusão de Curso (ADS). Detalha a arquitetura, criação e impacto do sistema de HelpDesk integrado com I.A.</p>
+                            <ul class="feature-list">
+                                <li>✦ HTML - CSS - JAVASCRIPT</li>
+                                <li>✦ Apresentação Acadêmica</li>
+                                <li>✦ Arquitetura de Sistemas</li>
+                            </ul>
+                            <a href="https://pim-website-dusky.vercel.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/portifolio antigo.png" alt="Matrix" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">LKS Portifólio 01</h3>
+                                <h3 class="service-title alternate">LKS Primeiro portifólio</h3>
+                            </div>
+                            <span class="service-number">03</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>A primeira iteração da identidade digital da LKS. Um portfólio clássico que serviu como fundação para a evolução brutalista atual do nosso ecossistema.</p>
+                            <ul class="feature-list">
+                                <li>✦ Front-end Development</li>
+                                <li>✦ Identidade Visual V1</li>
+                            </ul>
+                            <a href="https://lkssolucoestecnologicas.netlify.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/biblioteca de componentes.png" alt="React" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">iblioteca Comp</h3>
+                                <h3 class="service-title alternate">React UI Repositório</h3>
+                            </div>
+                            <span class="service-number">04</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Uma biblioteca pessoal de componentes UI desenvolvida no início da jornada com React. Criada para armazenar trechos de código, CSS e lógicas reaproveitáveis.</p>
+                            <ul class="feature-list">
+                                <li>✦ React.js</li>
+                                <li>✦ Componentização</li>
+                                <li>✦ Gestão de Estado</li>
+                                <li>✦ CSS Modules</li>
+                            </ul>
+                            <a href="https://bibliotecacompponentes.netlify.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/chaveiro walter.png" alt="Keys" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">LP Chaveiro Walter</h3>
+                                <h3 class="service-title alternate">LandingPage Chaveiro Walter</h3>
+                            </div>
+                            <span class="service-number">05</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Presença digital ágil para negócio local em São Paulo. Focado em conversão rápida, SEO local e botões de chamada à ação diretos para emergências (WhatsApp).</p>
+                            <ul class="feature-list">
+                                <li>✦ SEO Local</li>
+                                <li>✦ Fast Loading</li>
+                                <li>✦ Mobile First</li>
+                            </ul>
+                            <a href="https://chaveirowaltersp.vercel.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/cupckake.png" alt="Cupcake" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">Recanto Cupcake</h3>
+                                <h3 class="service-title alternate">Recanto Cupcake</h3>
+                            </div>
+                            <span class="service-number">06</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Vitrine digital imersiva para confeitaria. Destaque para a integração de vídeo background de alta qualidade (Hero Video) para despertar desejo imediato no consumidor.</p>
+                            <ul class="feature-list">
+                                <li>✦ Video Backgrounds</li>
+                                <li>✦ Vitrine de Produtos</li>
+                                <li>✦ UI/UX Gastronomia</li>
+                            </ul>
+                            <a href="https://recantodocupcake.netlify.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <img src="assets/pag oficial.png" alt="Gamer" class="service-hover-image" crossorigin="anonymous">
+                    <div class="accordion-header">
+                        <div class="title-wrapper">
+                            <div class="service-title-item">
+                                <h3 class="service-title">Pagina Error 404</h3>
+                                <h3 class="service-title alternate">RPG Error 404</h3>
+                            </div>
+                            <span class="service-number">07</span>
+                        </div>
+                        <div class="service-arrow">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Experiência gamificada de página de erro (404 Not Found) inspirada em interfaces de RPG clássico. Uma demonstração de criatividade em UX para transformar frustração em engajamento.</p>
+                            <ul class="feature-list">
+                                <li>✦ Gamificação UI</li>
+                                <li>✦ Interatividade JS</li>
+                                <li>✦ Design Criativo</li>
+                            </ul>
+                            <a href="https://errorpg.netlify.app/" target="_blank" class="view-project-btn magnetic" style="margin-top: 20px; font-size: 0.8rem; padding: 0.8rem 2rem;"><span>ACESSAR PROJETO</span></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contato-final" class="final-cta-section">
+        
+        <div class="cta-text-wrapper">
+            <h2 class="massive-text text-muted">CLIQUE ABAIXO PARA</h2>
+            <h2 class="massive-text text-muted">ENVIAR AS</h2>
+            <h2 class="massive-text text-outline">ESPECIFICAÇÕES</h2>
+            <h2 class="massive-text text-muted">DIRETAMENTE</h2>
+            <h2 class="massive-text text-muted">PARA NOSSA MESA</h2>
+            <h2 class="massive-text text-muted">DE OPERAÇÕES</h2>
+            
+            <a href="mailto:lkssoltech@gmail.com?subject=Iniciando%20Projeto%20-%20LKS%20Foundry" id="lks-modern-btn" class="modern-btn-group magnetic">
+                
+                <div class="modern-aura-glow"></div>
+
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+
+                <div class="modern-btn-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                        <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+                    </svg>
+                    
+                    <span class="modern-text">INICIAR CONTATO</span>
+
+                    <div class="modern-arrow-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-arrow">
+                            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="modern-internal-glow"></div>
+            </a>
+            
+        </div>
+    </section>
+
+    <section id="redes-sociais" class="social-cta-section">
+        <div class="social-container">
+            
+            <a href="https://wa.me/5511961608885?"_blank" class="modern-btn-group social-btn whats magnetic">
+                <div class="modern-aura-glow"></div>
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+                <div class="modern-btn-inner social-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <span class="modern-text social-text">WhatsApp</span>
+                </div>
+                <div class="modern-internal-glow"></div>
+            </a>
+
+            <a href="https://www.instagram.com/lkstecnologia/" target="_blank" class="modern-btn-group social-btn insta magnetic">
+                <div class="modern-aura-glow"></div>
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+                <div class="modern-btn-inner social-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    <span class="modern-text social-text">Instagram</span>
+                </div>
+                <div class="modern-internal-glow"></div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/andrelkstech/" target="_blank" class="modern-btn-group social-btn linkedin magnetic">
+                <div class="modern-aura-glow"></div>
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+                <div class="modern-btn-inner social-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    <span class="modern-text social-text">LinkedIn</span>
+                </div>
+                <div class="modern-internal-glow"></div>
+            </a>
+
+            <a href="https://github.com/LkSolucoesTec?tab=repositories" target="_blank" class="modern-btn-group social-btn github magnetic">
+                <div class="modern-aura-glow"></div>
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+                <div class="modern-btn-inner social-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    <span class="modern-text social-text">GitHub</span>
+                </div>
+                <div class="modern-internal-glow"></div>
+            </a>
+
+            <a href="https://www.youtube.com/@lkssoltech" target="_blank" class="modern-btn-group social-btn youtube magnetic">
+                <div class="modern-aura-glow"></div>
+                <div class="modern-border-wrap">
+                    <div class="modern-border-spin"></div>
+                </div>
+                <div class="modern-btn-inner social-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-sparkle">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+                    </svg>
+                    <span class="modern-text social-text">YouTube</span>
+                </div>
+                <div class="modern-internal-glow"></div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer class="lks-footer">
+        <svg viewBox="0 0 120 28" class="wave-svg">
+            <defs> 
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="
+                         1 0 0 0 0  
+                         0 1 0 0 0  
+                         0 0 1 0 0  
+                         0 0 0 13 -9" result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+                <path id="wave" d="M 0,10 C 30,10 30,15 60,15 90,15 90,10 120,10 150,10 150,15 180,15 210,15 210,10 240,10 v 28 h -240 z" />
+            </defs> 
+
+            <use id="wave3" class="wave" href="#wave" x="0" y="-2" ></use> 
+            <use id="wave2" class="wave" href="#wave" x="0" y="0" ></use>
+            
+            <g class="gooeff">
+                <circle class="drop drop1" cx="20" cy="2" r="1.8" />
+                <circle class="drop drop2" cx="25" cy="2.5" r="1.5" />
+                <circle class="drop drop3" cx="16" cy="2.8" r="1.2" />
+                <use id="wave1" class="wave" href="#wave" x="0" y="1" />
+            </g>
+            
+            <g class="topball magnetic" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                <circle class="ball" cx="110" cy="8" r="4" stroke="none" stroke-width="0" fill="#00e6ff" />
+                <g class="arrow">
+                    <polyline points="108,8 110,6 112,8" fill="none" />
+                    <polyline points="110,6 110,10.5" fill="none" />
+                </g>
+            </g>
+        </svg>
+
+        <div class="footer-text">
+            © 2026 TODOS OS DIREITOS RESERVADOS A LKS SOLUÇÕES TECNOLÓGICAS
+        </div>
+    </footer>
+
+</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="main.js"></script>
+    <script type="module" src="particle-text.js"></script>
+    
+</body>
+
+</html>
+
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="main.js"></script>
+    <script type="module" src="p"></script>
+</body>
+</html>

@@ -1,0 +1,1190 @@
+/* ========================================== */
+/* LKS ELITE OS - TITANIUM BASE STYLES */
+/* ========================================== */
+:root {
+    --bg: #030303; /* Fundo extremamente escuro */
+    --fg: #e0e0e0; /* Texto base */
+    --accent: #00e6ff; /* Ciano LKS */
+    --secondary: #0a192f; /* Azul profundo LKS */
+    --easing: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    cursor: none; /* Esconde o cursor padrão do Windows */
+}
+
+body, html {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* Faz a página deslizar ao invés de pular no clique */
+}
+
+/* Tipografia Mestre */
+.text-outline { color: transparent; -webkit-text-stroke: 1px #e0e0e0; }
+.text-highlight { color: var(--accent); text-shadow: 0 0 15px rgba(0, 230, 255, 0.4); }
+
+/* ========================================== */
+/* OVERLAYS (Grão e Cursor Magnético) */
+/* ========================================== */
+.noise {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9998; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+#cursor {
+    position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; mix-blend-mode: difference; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s var(--easing), height 0.3s var(--easing), transform 0.05s linear;
+}
+
+#cursor.magnet {
+    width: 90px; height: 90px; background: transparent;
+    border: 1px solid var(--accent); backdrop-filter: blur(0px);
+}
+
+#cursor.magnet::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 10px; height: 10px; background: var(--accent); border-radius: 50%;
+}
+
+/* ========================================== */
+/* NAVBAR BRUTALISTA */
+/* ========================================== */
+.brutal-nav {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw !important; /* Força 100% da tela */
+    max-width: 100% !important;
+    padding: 1.5rem 4rem !important; /* Espaçamento elegante */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    z-index: 100;
+    
+    /* O Visual Sólido da Imagem (Gallery Mode Permanente) */
+    background: rgba(3, 3, 3, 0.95) !important; /* Fundo quase preto (Vantablack) */
+    backdrop-filter: blur(10px); /* Leve desfoque para o que passar atrás */
+    border-radius: 0 !important; /* Sem cantos arredondados */
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important; /* Linha sutil embaixo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9) !important;
+    
+    transform: none !important; /* Desliga qualquer 3D */
+    transition: none !important; /* Desliga transições mutantes */
+}
+
+.brutal-nav.gallery-mode {
+    width: 100vw !important;
+    max-width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    background: #030303 !important; /* Vantablack */
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    padding: 1.5rem 4rem !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9) !important;
+}
+
+/* Ajuste fino do "da" no mobile */
+@media (max-width: 900px) {
+    .hero h1 .word.da { font-size: 8vw; }
+    .hero h1 { font-size: 14vw; }
+}
+
+.nav-logo { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: #fff; position: relative; }
+.nav-logo:hover { animation: glitch-anim 0.3s infinite; }
+.nav-logo::before, .nav-logo::after { content: "LKS SOL TECH"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); opacity: 0.8; display: none; }
+.nav-logo:hover::before, .nav-logo:hover::after { display: block; }
+.nav-logo:hover::before { color: var(--secondary); z-index: -1; transform: translate(-2px, -2px); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); animation: glitch-anim-2 0.5s infinite linear alternate-reverse; }
+.nav-logo:hover::after { color: var(--accent); z-index: -2; transform: translate(2px, 2px); clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); animation: glitch-anim-2 0.5s infinite linear alternate-reverse; }
+
+@keyframes glitch-anim { 0%, 100% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } }
+
+.nav-menu { display: flex; gap: 3rem; list-style: none; align-items: center; }
+.nav-link { position: relative; font-weight: 500; font-size: 0.95rem; text-decoration: none; color: #fff; text-transform: uppercase; letter-spacing: 1px; padding: 10px; }
+.nav-link::before { content: '>'; position: absolute; left: -10px; opacity: 0; transition: all 0.2s; color: var(--accent); }
+.nav-link:hover::before { opacity: 1; left: 0; }
+.nav-link:hover { padding-left: 15px; }
+
+.cta-btn {
+    position: relative; padding: 0.8rem 2rem; background: #fff; color: #000;
+    font-weight: 700; border: 1px solid transparent; text-transform: uppercase;
+    font-family: 'Space Grotesk'; font-size: 0.9rem; letter-spacing: 1px;
+    overflow: hidden; transition: all 0.3s;
+}
+.cta-btn::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--accent); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1; }
+.cta-btn span { position: relative; z-index: 2; transition: color 0.3s; }
+.cta-btn:hover span { color: #000; }
+.cta-btn:hover::after { transform: translateX(0); }
+
+/* ========================================== */
+/* HERO E TRANSIÇÕES */
+/* ========================================== */
+/* --- HERO BRUTALISTA --- */
+#scroll-content { will-change: transform; z-index: 2; position: relative; pointer-events: none;}
+#scroll-content * { pointer-events: auto; }
+
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; text-align: center; overflow: hidden; }
+.hero-title-container { perspective: 1000px; transform-style: preserve-3d; }
+
+.hero h1 { 
+    font-family: 'Syncopate', sans-serif; 
+    font-size: 10vw; 
+    line-height: 0.8; 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    color: transparent; 
+    -webkit-text-stroke: 2px var(--fg); 
+    position: relative; 
+    z-index: 10; 
+    transform: translateZ(50px);
+    
+    /* A MÁGICA DA LUZ VOLTOU: Isso faz o cursor agir como uma lanterna */
+    mix-blend-mode: color-dodge; 
+}
+
+.hero h1 .word { display: inline-block; }
+
+/* A palavra 'da' isolada e intocável */
+.hero h1 .word.da { 
+    font-size: 4vw; 
+    text-transform: lowercase; 
+    -webkit-text-stroke: 1px var(--fg); 
+    vertical-align: middle; 
+    margin: 0 1rem; 
+}
+
+.hero h1 .char { 
+    display: inline-block; 
+    transition: color 0.3s, transform 0.3s, text-shadow 0.3s; 
+}
+
+/* Quando o mouse entra na área do título, as letras acendem */
+.hero h1:hover .char { 
+    color: var(--accent); 
+    -webkit-text-stroke: 0px; 
+    transform: translateZ(20px); 
+    text-shadow: 0 0 30px rgba(0, 230, 255, 0.6); 
+}
+
+/* A FITA (TAPE) */
+.tape-wrapper { position: absolute; bottom: 8vh; left: -10%; width: 120%; background: var(--accent); color: #000; transform: rotate(-2deg); padding: 10px 0; border-top: 3px solid #000; border-bottom: 3px solid #000; box-shadow: 0 10px 30px rgba(0, 230, 255, 0.2); }
+.tape-text { font-family: 'Syncopate'; font-size: 1.8rem; font-weight: 800; white-space: nowrap; animation: tapeScroll 20s linear infinite; }
+@keyframes tapeScroll { to { transform: translateX(-50%); } }
+
+/* SEÇÕES ESCURAS (TEXTOS LKS) */
+.section-dark { min-height: 80vh; background: #050505; display: flex; align-items: center; padding: 10vw; border-top: 1px solid #111; }
+.manifesto-section { padding-top: 15vw; }
+.transition-section { justify-content: flex-end; text-align: right; position: relative; }
+.big-text { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.2; font-weight: 300; color: #555; text-transform: uppercase; }
+.big-text span { color: #fff; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+
+.down-arrow-hint { position: absolute; bottom: 5vh; right: 10vw; font-size: 3rem; color: var(--accent); animation: bounce 2s infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+
+/* ========================================== */
+/* A GALERIA INFINITA (Scroll Horizontal) */
+/* ========================================== */
+#lks-gallery-container { 
+    width: 100vw; height: 100vh; position: relative; overflow: hidden; 
+    pointer-events: none !important; /* Vaza o clique pra rede neural */
+}
+.gallery-track { display: flex; width: 500vw; height: 100%; pointer-events: none; }
+.gallery-slide { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; gap: 5vw; padding: 0 10vw; position: relative; pointer-events: none; }
+
+.catalogue-number { font-family: 'Space Grotesk'; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 1.5rem; display: inline-block; border-bottom: 1px solid rgba(0, 230, 255, 0.3); padding-bottom: 5px; pointer-events: auto;}
+.slide-title { font-family: 'Syncopate'; font-size: clamp(3rem, 5vw, 6rem); line-height: 1; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -2px; pointer-events: auto;}
+.slide-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 1.3vw, 1.3rem); line-height: 1.8; color: #bbb; text-align: justify; pointer-events: auto;}
+
+/* A largura do seu texto original mantida intacta */
+.slide-text { width: 40vw; pointer-events: auto !important;}
+
+/* ========================================== */
+/* O QUADRADO DA IMAGEM (Substitui o antigo slide-visual) */
+/* ========================================== */
+.card {
+    width: 35vw; /* Mesma largura do seu visual antigo */
+    max-width: 450px;
+    aspect-ratio: 1 / 1; /* MÁGICA: Força o quadrado perfeito */
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: -20px 20px 40px rgba(0,0,0,0.8);
+    
+    /* Mantive o SEU efeito 3D inclinado! */
+    transform: perspective(1000px) rotateY(15deg); 
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    
+    pointer-events: auto !important; /* Para o hover funcionar */
+    z-index: 2;
+}
+
+/* O Hover no Quadrado Inteiro (Gira pra frente) */
+.gallery-slide:hover .card { 
+    transform: perspective(1000px) rotateY(5deg) scale(1.02); 
+}
+
+/* A Imagem dentro do Quadrado */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o quadrado sem distorcer a foto */
+    filter: grayscale(1) brightness(0.5); /* Modo Stealth / Apagado */
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* O Efeito Hover na Imagem (Acende as cores e dá zoom in) */
+.card:hover img {
+    filter: grayscale(0) brightness(1); /* Traz a cor de volta */
+    transform: scale(1.05); /* Zoom interno suave */
+}
+
+/* ========================================== */
+/* RESPONSIVIDADE (Mobile & Tablets) */
+/* ========================================== */
+@media (max-width: 900px) {
+    .gallery-slide {
+        flex-direction: column; /* Empilha: Imagem em cima, texto embaixo */
+        gap: 3rem;
+        padding: 0 5vw;
+    }
+    
+    .card, .pokemon-card-stage {
+        width: 80vw; /* Aumenta o quadrado no celular */
+        max-width: 350px;
+        transform: perspective(1000px) rotateY(0deg); /* Tira a inclinação 3D para focar na imagem */
+    }
+    
+    .gallery-slide:hover .card {
+        transform: scale(1.02); /* Hover mais simples no mobile */
+    }
+
+    .slide-text {
+        width: 90vw; /* Texto ocupa a tela quase toda */
+        text-align: center; /* Centraliza tudo no celular para ficar bonito */
+    }
+
+    .slide-desc {
+        text-align: center; /* Centraliza o parágrafo no celular */
+    }
+}
+
+/* ========================================== */
+/* CARTA POKÉMON HOLOGRÁFICA (O FUNDADOR) */
+/* ========================================== */
+.founder-slide { gap: 8vw; }
+
+.pokemon-card-stage {
+    perspective: 2000px;
+    width: 25vw; min-width: 320px;
+    height: 75vh; min-height: 500px;
+    pointer-events: auto !important;
+}
+
+.pokemon-card {
+    width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8); cursor: pointer;
+}
+
+.pokemon-card.flipped { transform: perspective(2000px) rotateY(180deg); }
+
+.card-face {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    backface-visibility: hidden; overflow: hidden; border-radius: 20px;
+}
+
+.card-front { background: linear-gradient(to bottom, #111, #0a0a0a); padding: 20px; z-index: 1; }
+.card-back { transform: rotateY(180deg); background: linear-gradient(to bottom, #0a0a0a, #1a1a1a); padding: 20px; z-index: 2; }
+
+.card-glare {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(105deg, transparent 20%, rgba(0, 230, 255, 0.4) 25%, rgba(255, 0, 255, 0.4) 45%, transparent 50%);
+    mix-blend-mode: color-dodge; opacity: 0; transition: opacity 0.3s;
+    z-index: 5; pointer-events: none;
+}
+.card-face:hover .card-glare { opacity: 1; }
+
+/* FRENTE */
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: 'Syncopate'; font-size: 0.8rem; color: #fff; }
+.card-hp { color: var(--accent); font-weight: 800; font-size: 1rem; }
+.card-image-wrapper { width: 100%; height: 60%; border-radius: 5px; overflow: hidden; margin-bottom: 15px; }
+.founder-photo { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s ease; }
+.card-face:hover .founder-photo { filter: grayscale(0%); }
+.card-body-front { text-align: center; }
+.card-body-front h3 { font-family: 'Syncopate'; font-size: 1.5rem; color: #fff; margin-bottom: 5px; }
+.card-body-front h4 { font-family: 'Inter'; font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-weight: 400; }
+.card-flip-hint { position: absolute; bottom: 10px; width: 100%; text-align: center; font-family: monospace; font-size: 0.7rem; color: rgba(255,255,255,0.4); pointer-events: none; }
+
+/* VERSO (SKILLS) */
+.card-inner-back { padding: 10px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+.card-back h3 { font-size: 2.5rem; margin-bottom: 10px;}
+.skills-grid { display: flex; flex-direction: column; gap: 10px; }
+.skill-item { margin-bottom: 5px; }
+.skill-info { display: flex; justify-content: space-between; color: #fff; font-size: 0.85rem; font-weight: 600; margin-bottom: 3px; }
+.progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--accent)); transform-origin: left; transform: scaleX(0); }
+.pokemon-card.flipped .progress-fill { animation: fill-bar 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 0.3s; }
+@keyframes fill-bar { to { transform: scaleX(1); } }
+.card-flavor-text { font-style: italic; color: #888; font-size: 0.75rem; text-align: center; margin-top: 15px;}
+
+/* ========================================== */
+/* TRANSIÇÃO DE PARTÍCULAS (PRÉ-PORTFÓLIO) */
+/* ========================================== */
+#portfolio-transition {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #030303; /* Fundo base da LKS */
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    z-index: 10;
+}
+
+#magic {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    z-index: 1;
+}
+
+.playground {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    z-index: 2;
+    pointer-events: none; /* Deixa o mouse atravessar para mexer nas partículas */
+}
+
+/* Reativa o clique apenas nos textos e botões */
+.playground * { pointer-events: auto; }
+
+.bottomPosition { text-align: center; margin-bottom: 8vh; }
+
+.bottomPosition h1.special {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff; margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.bottomPosition .minText {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 4px; font-weight: 400;
+}
+
+/* ========================================== */
+/* PORTFÓLIO (DOSSIÊ LKS ELITE) */
+/* ========================================== */
+.lks-portfolio-engine {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    font-family: 'Space Grotesk', sans-serif;
+    --theme-color: #00e6ff; 
+    z-index: 20; /* GARANTE QUE FICA POR CIMA DE TUDO */
+    pointer-events: auto; /* GARANTE QUE OS CLIQUES FUNCIONEM */
+}
+
+/* --- Menu Lateral (Thumbnails) --- */
+.portfolio-sidebar {
+    width: 15%; min-width: 120px;
+    height: 100%;
+    background: rgba(5,5,5,0.8);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    gap: 20px; z-index: 10;
+}
+
+.nav-thumb {
+    width: 80px; height: 80px;
+    position: relative; cursor: pointer;
+    clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+    transition: transform 0.3s var(--easing);
+}
+.nav-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(100%) brightness(0.5);
+    transition: filter 0.3s;
+}
+.thumb-border {
+    position: absolute; inset: 0;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: border-color 0.3s;
+    clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+}
+
+.nav-thumb:hover { transform: scale(1.05); }
+.nav-thumb:hover img { filter: grayscale(50%) brightness(0.8); }
+
+/* Thumb Ativa */
+.nav-thumb.active img { filter: grayscale(0%) brightness(1); }
+.nav-thumb.active .thumb-border { border-color: var(--theme-color); box-shadow: inset 0 0 15px var(--theme-color); }
+
+/* --- Área Principal dos Slides --- */
+.portfolio-main {
+    flex: 1; position: relative; height: 100%;
+}
+
+.portfolio-slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    padding: 0 10%;
+}
+.portfolio-slide.active {
+    opacity: 1; visibility: visible; pointer-events: auto;
+}
+
+/* Background com Imagem Imensa e Parallax */
+.slide-bg {
+    position: absolute; inset: 0; z-index: 0;
+}
+.slide-bg img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.1); /* Margem para parallax JS */
+}
+.bg-overlay {
+    position: absolute; inset: 0;
+    /* Degrade do Valorant (escuro na esquerda, transparente na direita) */
+    background: linear-gradient(90deg, #000 10%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 100%);
+}
+
+/* Conteúdo do Dossiê */
+.slide-content {
+    position: relative; z-index: 1;
+    width: 45%; min-width: 400px;
+}
+
+.project-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.project-header h5 { font-size: 0.8rem; letter-spacing: 5px; color: var(--theme-color); text-transform: uppercase; margin: 0;}
+.gl-icon { width: 30px; height: 30px; }
+
+.project-title {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1; margin-bottom: 30px;
+    background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Caixas Estilo HUD Brutalista */
+.tech-box {
+    border: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    padding: 20px; display: flex; gap: 15px; margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border-left: 3px solid var(--theme-color);
+}
+.tech-box-icon { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+.tech-box-content h5 { font-family: 'Syncopate'; font-size: 0.9rem; color: #fff; margin-bottom: 5px; letter-spacing: 1px;}
+.tech-box-content p { color: #aaa; font-size: 0.85rem; line-height: 1.6; }
+
+/* Ícones de Habilidades (Stack) */
+.tech-stack-icons { display: flex; gap: 10px; margin-bottom: 40px; }
+.stack-item {
+    flex: 1; border: 1px solid rgba(255,255,255,0.1);
+    text-align: center; padding: 10px 0;
+    background: rgba(0,0,0,0.4); backdrop-filter: blur(5px);
+}
+.stack-item p { font-size: 0.75rem; color: var(--theme-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0;}
+
+/* Botão Cyber */
+.view-project-btn {
+    display: inline-block; padding: 1rem 3rem;
+    border: 1px solid var(--theme-color); color: #fff;
+    text-transform: uppercase; font-weight: 700; letter-spacing: 2px;
+    text-decoration: none; position: relative; overflow: hidden;
+    background: rgba(0,0,0,0.5); transition: 0.3s;
+}
+.view-project-btn::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--theme-color); transform: scaleX(0); transform-origin: right;
+    transition: transform 0.4s var(--easing); z-index: -1;
+}
+.view-project-btn:hover::before { transform: scaleX(1); transform-origin: left; }
+.view-project-btn:hover { color: #000; }
+
+@media (max-width: 900px) {
+    .lks-portfolio-engine { flex-direction: column-reverse; }
+    .portfolio-sidebar { width: 100%; height: auto; flex-direction: row; padding: 15px; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
+    .nav-thumb { width: 60px; height: 60px; }
+    .slide-content { width: 100%; min-width: 100%; padding-top: 10vh; }
+    .project-title { font-size: 2.5rem; }
+}
+
+/* ========================================== */
+/* ARQUIVO DE PROJETOS (ACCORDION CODEPEN LKS)*/
+/* ========================================== */
+.archive-section {
+    background-color: #030303; /* Fundo LKS */
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.archive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 8rem 2rem;
+}
+
+.archive-header h2 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    text-align: center;
+    margin: 0 0 4rem 0;
+    letter-spacing: 0.05em;
+}
+.archive-header .text-muted { color: #555; }
+
+/* Acordeão */
+.accordion-item {
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordion-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2.5rem 0; cursor: pointer; position: relative; z-index: 2;
+}
+
+/* Rolling Text Mask */
+.title-wrapper { display: flex; align-items: flex-start; gap: 0.5rem; }
+
+.service-title-item {
+    height: clamp(2.5rem, 5vw, 4.5rem);
+    overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+}
+
+.service-title {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin: 0; line-height: 1; font-weight: 700;
+    color: #ffffff; text-transform: uppercase;
+}
+.service-title.alternate {
+    color: var(--accent); /* O texto debaixo é Ciano! */
+    -webkit-text-stroke: 1px var(--accent);
+    color: transparent;
+}
+
+.service-number {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 1rem; color: var(--accent); margin-top: 0.5rem;
+}
+
+.service-arrow { width: 24px; height: 24px; color: #fff; }
+
+/* Hidden Content */
+.accordion-content { height: 0; overflow: hidden; }
+
+.accordion-inner {
+    padding-bottom: 3rem; max-width: 600px; position: relative; z-index: 2;
+}
+.accordion-inner p {
+    font-family: 'Inter', sans-serif; font-size: 1.1rem; line-height: 1.6;
+    color: #aaa; margin-bottom: 2rem;
+}
+
+.feature-list {
+    font-family: 'Space Grotesk', sans-serif;
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: #fff; font-size: 0.9rem;
+}
+.feature-list li { color: #888; }
+
+/* Hover Image */
+.service-hover-image {
+    position: absolute; right: 10%; top: 50%;
+    width: 350px; height: 250px; object-fit: cover;
+    opacity: 0; pointer-events: none; z-index: 0;
+    border-radius: 5px; filter: grayscale(50%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+@media screen and (max-width: 991px) {
+    .service-hover-image { display: none !important; }
+    .feature-list { grid-template-columns: 1fr; }
+}
+
+/* ========================================== */
+/* BOTÃO LIQUID METAL (E-MAIL CTA) */
+/* ========================================== */
+.liquid-btn-wrapper {
+    display: inline-block;
+    border-radius: 50%;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+#liquid-metal {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+/* O fundo escuro com a sombra de vidro interna */
+#liquid-metal::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px; height: 170px;
+    background: linear-gradient(#222, #000);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+.outline {
+    position: relative;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; justify-content: center; align-items: center;
+    width: 205px; height: 205px;
+    border-radius: 50%; z-index: 1;
+}
+
+/* O Anel que acende no Hover */
+.outline::before {
+    content: "";
+    position: absolute; inset: 0;
+    padding: 3px; border-radius: inherit;
+    /* Gradiente com o Ciano LKS e Magenta */
+    background: conic-gradient(from 180deg, var(--accent), #ff00ff, var(--accent));
+    filter: grayscale(1);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    transition: all 0.4s ease;
+}
+
+.outline:hover::before {
+    padding: 6px; 
+    filter: grayscale(0); 
+    box-shadow: 0 0 30px var(--accent);
+}
+
+.outline .svg-icon {
+    width: 60px;
+    fill: #fff;
+    transform: rotate(-45deg);
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.outline:hover .svg-icon {
+    fill: var(--accent);
+    transform: rotate(-45deg) scale(1.1);
+}
+
+/* ========================================== */
+/* ULTRA MODERN BUTTON (CTA FINAL GIGANTE) */
+/* ========================================== */
+
+.final-cta-section {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    background: #030303;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Força pro centro */
+    justify-content: center !important; /* Força pro centro */
+    border-top: 1px solid rgba(255,255,255,0.05);
+    z-index: 5;
+    overflow: hidden;
+    padding: 4rem 2rem;
+}
+
+.cta-text-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Força o texto pro centro */
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100%;
+}
+
+.massive-text {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 6vw, 7rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    white-space: nowrap;
+}
+
+.massive-text.text-muted { color: rgba(255, 255, 255, 0.4); transition: color 0.5s ease; }
+.massive-text.text-outline { color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6); transition: -webkit-text-stroke 0.5s ease; }
+
+.cta-text-wrapper:hover .massive-text.text-muted { color: rgba(255, 255, 255, 0.9); }
+.cta-text-wrapper:hover .massive-text.text-outline { -webkit-text-stroke: 2px rgba(255, 255, 255, 1); }
+
+/* --- Base do Botão Moderno --- */
+.modern-btn-group {
+    position: relative; display: inline-flex !important; padding: 2px !important;
+    border-radius: 9999px; transition: all 0.5s ease;
+    text-decoration: none; z-index: 10; cursor: pointer;
+}
+.modern-btn-group:hover { transform: scale(1.05); box-shadow: 0 0 50px -12px rgba(0, 230, 255, 0.5); }
+.modern-btn-group:active { transform: scale(0.95); }
+
+.modern-aura-glow {
+    position: absolute; inset: -15px;
+    background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(0, 230, 255, 0.4) 0%, transparent 70%);
+    border-radius: 9999px; opacity: 0; transition: opacity 0.5s ease; filter: blur(20px); z-index: -1;
+}
+.modern-btn-group:hover .modern-aura-glow { opacity: 1; }
+
+.modern-border-wrap { position: absolute; inset: 0; border-radius: 9999px; overflow: hidden; z-index: 0; }
+.modern-border-spin {
+    position: absolute; inset: -200%;
+    background: conic-gradient(from 0deg at 50% 50%, var(--accent) 0%, #a855f7 25%, var(--accent) 50%, #a855f7 75%, var(--accent) 100%);
+    animation: spin-slow 4s linear infinite; transition: animation-duration 0.5s ease;
+}
+.modern-btn-group:hover .modern-border-spin { animation-duration: 2s; }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.modern-btn-inner {
+    position: relative; background: #020617; border-radius: 9999px;
+    display: flex; align-items: center; transition: background 0.3s ease;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.05); z-index: 1;
+}
+.modern-btn-group:hover .modern-btn-inner { background: rgba(0,0,0,0.9); }
+
+.modern-internal-glow {
+    position: absolute; inset: 0; border-radius: 9999px; filter: blur(24px); background: rgba(0, 230, 255, 0.1);
+    opacity: 0; transition: opacity 0.7s ease; z-index: -1;
+}
+.modern-btn-group:hover .modern-internal-glow { opacity: 1; }
+.modern-sparkle { color: var(--accent); transition: all 0.5s ease; }
+.modern-btn-group:hover .modern-sparkle { transform: rotate(12deg) scale(1.1); }
+.modern-text {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; white-space: nowrap;
+    background: linear-gradient(to right, #ffffff, #ffffff, #94a3b8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.modern-arrow-box {
+    display: flex; align-items: center; justify-content: center; border-radius: 9999px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;
+}
+.modern-arrow { color: #fff; transition: transform 0.3s ease; }
+.modern-btn-group:hover .modern-arrow-box { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 230, 255, 0.6); }
+.modern-btn-group:hover .modern-arrow { transform: translateX(2px); color: #000; }
+
+/* --- A ESCALA DO BOTÃO PRINCIPAL --- */
+#lks-modern-btn { margin-top: 5rem !important; margin-bottom: 2rem !important; }
+#lks-modern-btn .modern-btn-inner { padding: 2rem 5rem !important; gap: 2rem !important; }
+#lks-modern-btn .modern-text { font-size: 2.2rem !important; letter-spacing: 2px !important; }
+#lks-modern-btn .modern-sparkle { width: 35px !important; height: 35px !important; }
+#lks-modern-btn .modern-arrow-box { width: 4rem !important; height: 4rem !important; }
+#lks-modern-btn .modern-arrow { width: 28px !important; height: 28px !important; }
+
+/* ========================================== */
+/* REDES SOCIAIS (AURA STYLE - LKS PURE CSS) */
+/* ========================================== */
+.social-cta-section {
+    position: relative;
+    width: 100vw;
+    background: #030303;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 3rem !important; /* Descola do botão gigante */
+    padding-bottom: 8rem !important; 
+    z-index: 4; 
+}
+
+.social-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+    max-width: 1000px;
+    padding: 0 2rem;
+}
+
+/* Modificadores para botões sociais (Evita Esmagamento) */
+.social-btn {
+    margin-top: 0 !important; 
+    border-radius: 9999px !important;
+}
+
+.social-btn .social-inner {
+    padding: 12px 24px !important; /* FORÇA A PÍLULA A ABRIR */
+    gap: 12px !important;
+    height: auto !important;
+    background: #020617 !important;
+}
+
+.social-text {
+    font-size: 1rem !important;
+    letter-spacing: 0.05rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+}
+
+.social-inner svg {
+    width: 20px !important;
+    height: 20px !important;
+    display: block !important;
+    transform: none !important; 
+    color: #fff;
+}
+.social-btn:hover .social-inner svg { transform: none !important; }
+
+/* --- Cores das Redes --- */
+.social-btn.whats .modern-border-spin { background: conic-gradient(from 0deg at 50% 50%, #128C7E 0%, #25D366 25%, #128C7E 50%, #25D366 75%, #128C7E 100%); }
+.social-btn.whats .modern-aura-glow { background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(37, 211, 102, 0.3) 0%, transparent 70%); }
+.social-btn.whats:hover { box-shadow: 0 0 50px -12px rgba(37, 211, 102, 0.4); }
+.social-btn.whats:hover .modern-internal-glow { background: rgba(37, 211, 102, 0.1); }
+.social-btn.whats:hover svg { color: #25D366; }
+
+.social-btn.insta .modern-border-spin { background: conic-gradient(from 0deg at 50% 50%, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.social-btn.insta .modern-aura-glow { background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(220, 39, 67, 0.3) 0%, transparent 70%); }
+.social-btn.insta:hover { box-shadow: 0 0 50px -12px rgba(220, 39, 67, 0.4); }
+.social-btn.insta:hover .modern-internal-glow { background: rgba(220, 39, 67, 0.1); }
+.social-btn.insta:hover svg { color: #cc2366; }
+
+.social-btn.linkedin .modern-border-spin { background: conic-gradient(from 0deg at 50% 50%, #004182 0%, #0077b5 25%, #004182 50%, #0077b5 75%, #004182 100%); }
+.social-btn.linkedin .modern-aura-glow { background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(0, 119, 181, 0.3) 0%, transparent 70%); }
+.social-btn.linkedin:hover { box-shadow: 0 0 50px -12px rgba(0, 119, 181, 0.4); }
+.social-btn.linkedin:hover .modern-internal-glow { background: rgba(0, 119, 181, 0.1); }
+.social-btn.linkedin:hover svg { color: #0077b5; }
+
+.social-btn.github .modern-border-spin { background: conic-gradient(from 0deg at 50% 50%, #24292e 0%, #fafbfc 25%, #24292e 50%, #fafbfc 75%, #24292e 100%); }
+.social-btn.github .modern-aura-glow { background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(250, 251, 252, 0.2) 0%, transparent 70%); }
+.social-btn.github:hover { box-shadow: 0 0 50px -12px rgba(250, 251, 252, 0.3); }
+.social-btn.github:hover .modern-internal-glow { background: rgba(250, 251, 252, 0.1); }
+.social-btn.github:hover svg { color: #fff; }
+
+.social-btn.youtube .modern-border-spin { background: conic-gradient(from 0deg at 50% 50%, #b30000 0%, #ff0000 25%, #b30000 50%, #ff0000 75%, #b30000 100%); }
+.social-btn.youtube .modern-aura-glow { background: radial-gradient(circle at var(--btn-mouse-x, 50%) var(--btn-mouse-y, 50%), rgba(255, 0, 0, 0.3) 0%, transparent 70%); }
+.social-btn.youtube:hover { box-shadow: 0 0 50px -12px rgba(255, 0, 0, 0.4); }
+.social-btn.youtube:hover .modern-internal-glow { background: rgba(255, 0, 0, 0.1); }
+.social-btn.youtube:hover svg { color: #ff0000; }
+
+/* ========================================== */
+/* FOOTER FINAL (LIQUID DARK MATTER) */
+/* ========================================== */
+.lks-footer {
+    width: 100vw;
+    position: relative;
+    background: #030303; /* Fundo base contínuo */
+    margin-top: 0;
+    z-index: 10;
+    overflow: hidden;
+    display: block;
+}
+
+.wave-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: translateY(5px); /* Tira qualquer linha branca invisível */
+}
+
+/* Área de Texto do Footer */
+.lks-footer .footer-text {
+    background-color: #0a0a0a; /* Cor do fluido */
+    margin: -1px 0px 0px 0px;
+    padding: 20px 10px 40px 10px;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* A Seta dentro da bolinha */
+.lks-footer .arrow {
+    stroke-width: 0.5px;
+    stroke: #000; /* Seta escura contrastando com o Ciano */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* A Bolinha (Back to Top) */
+.lks-footer .topball {
+    animation: ball 1.5s ease-in-out infinite alternate;
+    animation-delay: 0.3s;
+    cursor: pointer;
+}
+.lks-footer .topball:hover .ball {
+    filter: brightness(1.2);
+}
+
+/* As Ondas */
+.lks-footer .wave {
+    animation: wave 3s linear infinite;
+    fill: #0a0a0a; /* O fluido escuro */
+}
+.lks-footer #wave2 { animation-duration: 5s; animation-direction: reverse; opacity: 0.6; }
+.lks-footer #wave3 { animation-duration: 7s; opacity: 0.3; }
+
+/* As Gotas (Gooey Effect) */
+.lks-footer .gooeff {
+    filter: url(#goo);
+}
+.lks-footer .drop {
+    fill: transparent;
+    animation: drop 5s ease infinite normal;
+    stroke: var(--accent); /* Gotas em Neon Ciano */
+    stroke-width: 0.5;
+    opacity: 0.6; 
+    transform: translateY(80%);
+}
+.lks-footer .drop1 { transform-origin: 20px 3px; }
+.lks-footer .drop2 { animation-delay: 3s; animation-duration: 3s; transform-origin: 25px 3px; }
+.lks-footer .drop3 { animation-delay: -2s; animation-duration: 3.4s; transform-origin: 16px 3px; }
+
+/* Animações Core */
+@keyframes drop {
+    0% { transform: translateY(80%); opacity: 0.6; }
+    80% { transform: translateY(80%); opacity: 0.6; }
+    90% { transform: translateY(10%); opacity: 0.6; }
+    100% { transform: translateY(0%) scale(1.5); stroke-width: 0.2; opacity: 0; }
+}
+@keyframes wave {
+    to { transform: translateX(-100%); }
+}
+@keyframes ball {
+    to { transform: translateY(20%); }
+}
+
+/* ========================================== */
+/* SISTEMA DE FITAS CRUZADAS (LKS MARQUEE INFINITO) */
+/* ========================================== */
+.tape-system {
+    position: relative;
+    width: 100vw;
+    height: 150px;
+    overflow: hidden; /* Corta as rebarbas laterais */
+    margin: 4rem 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* A faixa em si (Ciano Maciço) */
+.tape-wrapper {
+    position: absolute;
+    width: 110vw; /* Ligeiramente maior que a tela para não faltar ponta ao inclinar */
+    background: var(--accent); /* Ciano da LKS */
+    padding: 15px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    pointer-events: none;
+}
+
+#tape-left-right { transform: rotate(-3deg); z-index: 2; }
+#tape-right-left { transform: rotate(3deg); z-index: 1; filter: brightness(0.85); }
+
+/* O trilho que segura os textos */
+.tape-track {
+    display: flex;
+    width: max-content; /* Deixa o texto esticar o quanto precisar */
+}
+
+/* O Texto (Forçado a ficar Preto) */
+.tape-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #000 !important; /* Força a cor preta absoluta */
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    padding-right: 15px; /* Espaço entre o fim de um e o início do outro */
+}
+
+/* Animações CSS Puras */
+.track-left { animation: scrollLeft 35s linear infinite; }
+.track-right { animation: scrollRight 35s linear infinite; }
+
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Move exatamente a metade da largura total */
+}
+
+@keyframes scrollRight {
+    0% { transform: translateX(-50%); } 
+    100% { transform: translateX(0); }
+}
+
+/* ========================================== */
+/* 📱 BLINDAGEM MOBILE E CORREÇÕES FINAIS 📱 */
+/* ========================================== */
+
+/* --- FIX 1: LOOP INFINITO E VISÍVEL DAS FITAS --- */
+.tape-track {
+    display: flex;
+    width: max-content;
+}
+.tape-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: #000 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    padding-right: 15px;
+}
+.track-left { animation: scrollLeft 35s linear infinite; }
+.track-right { animation: scrollRight 35s linear infinite; }
+
+/* --- FIX 2: PORTFÓLIO ALINHADO E SEM SOMBRA BRANCA --- */
+.playground {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    top: 0; left: 0;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: center;
+    z-index: 2;
+    pointer-events: none;
+}
+.bottomPosition { text-align: center; margin-bottom: 8vh; }
+.bottomPosition h1.special {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #fff; margin-bottom: 5px;
+    letter-spacing: 2px;
+    text-shadow: none !important;
+}
+
+/* ========================================== */
+/* 📱 MEDIA QUERIES (TUDO ABAIXO DE 900PX) 📱 */
+/* ========================================== */
+@media (max-width: 900px) {
+    
+    /* 1. MENU HAMBÚRGUER (Ícone Base) */
+    .nav-menu {
+        display: none !important; 
+    }
+    .cta-btn {
+        padding: 0.5rem 1rem !important; 
+        font-size: 0.75rem !important;
+        margin-right: 50px;
+    }
+    .menu-toggle {
+        display: block; position: absolute; right: 2rem; top: 50%;
+        transform: translateY(-50%); width: 30px; height: 30px;
+        cursor: pointer; z-index: 101;
+    }
+    .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after {
+        content: ''; display: block; background: var(--accent);
+        height: 2px; width: 100%; border-radius: 9999px; transition: all 0.3s ease;
+    }
+    .menu-toggle span::before { transform: translateY(-8px); }
+    .menu-toggle span::after { transform: translateY(6px); }
+
+    /* --- O MENU ABERTO (Drop-down Brutalista) --- */
+    .nav-menu.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100vw;
+        background: rgba(3, 3, 3, 0.98); 
+        backdrop-filter: blur(15px);
+        padding: 2rem 0 3rem 0;
+        border-bottom: 1px solid rgba(0, 230, 255, 0.3); 
+        align-items: center;
+        gap: 2rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+        z-index: 100;
+    }
+    .nav-menu.active .nav-link {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+    /* --- ANIMAÇÃO DO 'X' --- */
+    .menu-toggle.active span { background: transparent; } 
+    .menu-toggle.active span::before { transform: translateY(0) rotate(45deg); }
+    .menu-toggle.active span::after { transform: translateY(0) rotate(-45deg); }
+
+    
+    /* 1. DESTRAVA A GALERIA (Permite rolar pra baixo) */
+    #lks-gallery-container {
+        height: auto !important;
+        overflow: visible !important; /* Tira o bloqueio de altura */
+    }
+
+    /* 2. MATA A ROLAGEM HORIZONTAL E EMPILHA */
+    .gallery-track {
+        display: flex !important;
+        flex-direction: column !important; /* Coloca um embaixo do outro */
+        width: 100vw !important; /* Reseta a largura absurda de 500vw */
+        height: auto !important;
+        transform: none !important; /* Mata a animação do Javascript horizontal */
+    }
+
+    /* 3. ARRUMA CADA SLIDE INDIVIDUALMENTE */
+    .gallery-slide {
+        flex-direction: column !important; /* Imagem em cima, texto embaixo */
+        gap: 3rem;
+        padding: 5rem 5vw !important;
+        height: auto !important;
+        min-height: 100vh; /* Cada slide pega no mínimo 1 tela de altura */
+        
+        /* Blindagem contra slides fantasmas (sumiço) */
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important; 
+    }
+    
+    /* 4. AJUSTA O QUADRADO (CARD) */
+    .card, .pokemon-card-stage {
+        width: 80vw !important; 
+        max-width: 350px !important;
+        transform: perspective(1000px) rotateY(0deg) !important; /* Desliga o 3D pra ficar limpo */
+    }
+    
+    .gallery-slide:hover .card {
+        transform: scale(1.02) !important;
+    }
+
+    /* 5. AJUSTA O TEXTO */
+    .slide-text {
+        width: 90vw !important; 
+        text-align: center !important; 
+    }
+
+    .slide-desc {
+        text-align: center !important; 
+    }
+}
