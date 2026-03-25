@@ -51,19 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-   // ==========================================
-    // 2 & 3. MOTOR UNIFICADO (NAVBAR + SKEW HERO + FITAS)
+    // ==========================================
+    // 2. LÓGICA DA NAVBAR
     // ==========================================
     const nav = document.querySelector('.brutal-nav');
-    const scrollContent = document.getElementById('scroll-content');
-    const tapeLRText = document.querySelector("#tape-left-right .tape-text");
-    const tapeRLText = document.querySelector("#tape-right-left .tape-text");
-
     let isScrolled = false;
-    let skew = 0; 
-    let lastScrollTop = 0;
 
-    // --- A. Lógica da Navbar ---
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             if (!isScrolled && nav) { nav.classList.add('scrolled'); isScrolled = true; }
@@ -80,88 +73,114 @@ document.addEventListener("DOMContentLoaded", () => {
         nav.style.transform = `translateX(-50%) perspective(1000px) rotateX(${-clamp(rx, -10, 10)}deg) rotateY(${clamp(ry, -10, 10)}deg)`;
     });
 
-    // --- B. Loop Contínuo das Fitas (GSAP) ---
-    if (tapeLRText && tapeRLText) {
-        gsap.to(tapeLRText, { x: "0%", duration: 50, repeat: -1, ease: "none" });
-        gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
+    // ==========================================
+    // 3. MENU HAMBÚRGUER CLICÁVEL (MOBILE)
+    // ==========================================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Fecha o menu automaticamente ao clicar em um link (UX Premium)
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
     }
 
-    // --- C. Motor de Velocidade e Inclinação (Roda a 60fps) ---
-    function scrollLoop() {
-        const scrollTop = window.scrollY;
-        const velocity = scrollTop - lastScrollTop;
-        lastScrollTop = scrollTop;
-        
-        // Calcula a velocidade suave
-        const speed = Math.min(Math.max(velocity * 0.05, -5), 5); 
-        skew = lerp(skew, speed, 0.1);
-        
-        // Verifica se é mobile (se for, desliga o skew para não bugar a leitura)
-        const isMobile = window.innerWidth <= 900;
-        
-        // 1. Aplica o Skew no Container Principal (Hero)
-        if (scrollContent) {
-            if (Math.abs(skew) > 0.05 && !isMobile) scrollContent.style.transform = `skewY(${skew}deg)`;
-            else scrollContent.style.transform = `skewY(0deg)`;
-        }
-
-        // 2. Aplica o Skew Invertido nas Fitas (O efeito de "X")
-        if (tapeLRText && tapeRLText) {
-            if (Math.abs(skew) > 0.1) {
-                gsap.set("#tape-left-right", { skewY: `${skew}deg` });
-                gsap.set("#tape-right-left", { skewY: `${-skew}deg` });
-            } else {
-                gsap.set("#tape-left-right", { skewY: `0deg` });
-                gsap.set("#tape-right-left", { skewY: `0deg` });
-            }
-        }
-
-        requestAnimationFrame(scrollLoop);
-    }
-    scrollLoop();
-
     // ==========================================
-   // FIX: MENU HAMBÚRGUER CLICÁVEL (MOBILE)
-  // ==========================================
-     const menuToggle = document.querySelector('.menu-toggle');
-     const navMenu = document.querySelector('.nav-menu');
-
-   if (menuToggle && navMenu) {
-      menuToggle.addEventListener('click', () => {
-        // Alterna as classes para abrir o menu e animar o hambúrguer
-        navMenu.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
-}
-
-    // ==========================================
-    // 4. GALERIA INFINITA (GSAP)
+    // 4. MOTOR UNIFICADO GSAP (SKEW + FITAS + GALERIA)
     // ==========================================
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        let sections = gsap.utils.toArray(".gallery-slide");
-        const track = document.querySelector(".gallery-track");
+        const scrollContent = document.getElementById('scroll-content');
+        const tapeLRText = document.querySelector("#tape-left-right .tape-text");
+        const tapeRLText = document.querySelector("#tape-right-left .tape-text");
+        let skew = 0; 
+        let lastScrollTop = 0;
 
-        if (sections.length > 0 && track) {
-            gsap.to(sections, {
-                xPercent: -100 * (sections.length - 1),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#lks-gallery-container",
-                    pin: true,
-                    scrub: 1,
-                    end: () => "+=" + (track.offsetWidth * 0.8) 
+        // --- O PULO DO GATO: GSAP MatchMedia ---
+        let mm = gsap.matchMedia();
+
+        // [DESKTOP] > 900px
+        mm.add("(min-width: 901px)", () => {
+            
+            // Fitas
+            if (tapeLRText && tapeRLText) {
+                gsap.to(tapeLRText, { x: "0%", duration: 50, repeat: -1, ease: "none" });
+                gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
+            }
+
+            // Galeria Horizontal
+            let sections = gsap.utils.toArray(".gallery-slide");
+            const track = document.querySelector(".gallery-track");
+            if (sections.length > 0 && track) {
+                gsap.to(sections, {
+                    xPercent: -100 * (sections.length - 1),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "#lks-gallery-container",
+                        pin: true,
+                        scrub: 1,
+                        end: () => "+=" + (track.offsetWidth * 0.8) 
+                    }
+                });
+            }
+
+            // Motor de Skew (Hero e Fitas)
+            function scrollLoop() {
+                const scrollTop = window.scrollY;
+                const velocity = scrollTop - lastScrollTop;
+                lastScrollTop = scrollTop;
+                
+                const speed = Math.min(Math.max(velocity * 0.05, -5), 5); 
+                skew = lerp(skew, speed, 0.1);
+                
+                if (scrollContent) {
+                    if (Math.abs(skew) > 0.05) scrollContent.style.transform = `skewY(${skew}deg)`;
+                    else scrollContent.style.transform = `skewY(0deg)`;
                 }
-            });
 
-            ScrollTrigger.create({
-                trigger: "#lks-gallery-container",
-                start: "top top",
-                onEnter: () => { if(nav) nav.classList.add('gallery-mode'); },
-                onLeaveBack: () => { if(nav) nav.classList.remove('gallery-mode'); }
-            });
-        }
+                if (tapeLRText && tapeRLText) {
+                    if (Math.abs(skew) > 0.1) {
+                        gsap.set("#tape-left-right", { skewY: `${skew}deg` });
+                        gsap.set("#tape-right-left", { skewY: `${-skew}deg` });
+                    } else {
+                        gsap.set("#tape-left-right", { skewY: `0deg` });
+                        gsap.set("#tape-right-left", { skewY: `0deg` });
+                    }
+                }
+                requestAnimationFrame(scrollLoop);
+            }
+            scrollLoop();
+
+            // Cleanup ao ir para mobile
+            return () => { 
+                skew = 0; 
+                if(scrollContent) scrollContent.style.transform = `skewY(0deg)`; 
+            };
+        });
+
+        // [MOBILE] <= 900px
+        mm.add("(max-width: 900px)", () => {
+            // GSAP desliga o ScrollTrigger da galeria sozinho aqui!
+            
+            // Mantém apenas as fitas rodando leve
+            if (tapeLRText && tapeRLText) {
+                gsap.to(tapeLRText, { x: "0%", duration: 45, repeat: -1, ease: "none" });
+                gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
+            }
+        });
     }
 
     // ==========================================
@@ -309,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             gsap.to(titleWrap, { x: 20, duration: 0.6, ease: "power3.out", overwrite: "auto" });
             gsap.to(titles, { y: "-100%", duration: 0.5, ease: "power3.out", overwrite: "auto" });
-            if(cursor) cursor.classList.add('magnet'); // Integra com o cursor LKS
+            if(cursor) cursor.classList.add('magnet');
         });
 
         item.addEventListener("mouseleave", () => {
@@ -344,7 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modernBtn) {
         document.addEventListener('mousemove', (e) => {
             const rect = modernBtn.getBoundingClientRect();
-            // Verifica se o mouse está perto/em cima do botão para recalcular a aura
             const btnX = e.clientX - rect.left;
             const btnY = e.clientY - rect.top;
             modernBtn.style.setProperty('--btn-mouse-x', btnX + 'px');
@@ -352,5 +370,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    
 });
