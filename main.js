@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+// OBRIGATÓRIO: window.load garante que o GSAP só calcule as distâncias
+// DEPOIS que todas as imagens pesadas do site terminarem de baixar.
+window.addEventListener("load", () => {
     
     // ==========================================
     // 1. CURSOR MAGNÉTICO E HACKER TEXT
@@ -84,8 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
             navMenu.classList.toggle('active');
             menuToggle.classList.toggle('active');
         });
-
-        // Fecha o menu automaticamente ao clicar em um link (UX Premium)
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let skew = 0; 
         let lastScrollTop = 0;
 
-        // --- O PULO DO GATO: GSAP MatchMedia ---
+        // O PULO DO GATO: GSAP MatchMedia
         let mm = gsap.matchMedia();
 
         // [DESKTOP] > 900px
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
             }
 
-            // --- A MÁGICA: Galeria Horizontal Corrigida ---
+            // A MÁGICA: Galeria Horizontal Corrigida
             const track = document.querySelector(".gallery-track");
             let sections = gsap.utils.toArray(".gallery-slide");
 
@@ -134,9 +134,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         trigger: "#lks-gallery-container",
                         pin: true,
                         scrub: 1,
+                        start: "top top",
                         // Termina a animação exatamente quando a pista acaba
                         end: () => "+=" + (track.scrollWidth - window.innerWidth),
-                        invalidateOnRefresh: true
+                        invalidateOnRefresh: true,
+                        anticipatePin: 1
                     }
                 });
             }
@@ -177,57 +179,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // [MOBILE] <= 900px
         mm.add("(max-width: 900px)", () => {
-            // GSAP desliga o ScrollTrigger da galeria sozinho aqui!
-            
-            // Mantém apenas as fitas rodando leve
+            // Mantém apenas as fitas rodando leve no mobile
             if (tapeLRText && tapeRLText) {
                 gsap.to(tapeLRText, { x: "0%", duration: 45, repeat: -1, ease: "none" });
                 gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
             }
         });
     }
-    
+
     // ==========================================
-    // 5. CARTA POKÉMON (FLIP E TILT 3D)
+    // 5. CARTA POKÉMON (TILT 3D E GIRO BLINDADO)
     // ==========================================
     const cardStage = document.querySelector('.pokemon-card-stage');
     const card = document.getElementById('founder-card');
     const glareFront = document.querySelector('.card-front .card-glare');
     const glareBack = document.querySelector('.card-back .card-glare');
 
+    let isAnimating = false; // TRAVA DE SEGURANÇA LKS
+
     if(cardStage && card) {
+        
+        // Tilt 3D com o Mouse
         cardStage.addEventListener('mousemove', (e) => {
+            if (isAnimating) return; // Se a carta estiver girando, CANCELA o tilt
+
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left; const y = e.clientY - rect.top;
             const centerX = rect.width / 2; const centerY = rect.height / 2;
-            let rotateX = ((y - centerY) / centerY) * -10;
-            let rotateY = ((x - centerX) / centerX) * 10;
+            let rotateX = ((y - centerY) / centerY) * -10; 
+            let rotateY = ((x - centerX) / centerX) * 10; 
             
-            if(card.classList.contains('flipped')){ rotateY *= -1; }
+            if(card.classList.contains('flipped')){ rotateY = 180 - rotateY; }
             
-            card.style.transform = `perspective(2000px) rotateX(${rotateX}deg) rotateY(${card.classList.contains('flipped') ? 180 + rotateY : rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            gsap.set(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                scale: 1.05,
+                transformPerspective: 2000,
+                overwrite: "auto"
+            });
             
             const moveX = (x / rect.width) * 100;
             const targetGlare = card.classList.contains('flipped') ? glareBack : glareFront;
             if(targetGlare) targetGlare.style.background = `linear-gradient(105deg, transparent ${moveX - 20}%, rgba(0, 230, 255, 0.4) ${moveX}%, rgba(255, 0, 255, 0.4) ${moveX + 20}%, transparent ${moveX + 40}%)`;
         });
 
+        // Tira o Mouse
         cardStage.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(2000px) rotateX(0deg) rotateY(${card.classList.contains('flipped') ? 180 : 0}deg) scale3d(1, 1, 1)`;
+            if (isAnimating) return;
+            gsap.to(card, {
+                rotateX: 0,
+                rotateY: card.classList.contains('flipped') ? 180 : 0,
+                scale: 1,
+                duration: 0.5,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
         });
 
+        // O Clique (Giro Mestre)
         card.addEventListener('click', () => {
+            isAnimating = true; // Aciona a Trava LKS
             card.classList.toggle('flipped');
-            if (typeof gsap !== 'undefined') {
-                gsap.to(card, {
-                    duration: 0.6,
-                    rotationY: card.classList.contains('flipped') ? 180 : 0,
-                    scale: 1,
-                    ease: "power2.inOut"
-                });
-            } else {
-                card.style.transform = `perspective(2000px) rotateY(${card.classList.contains('flipped') ? 180 : 0}deg)`;
-            }
+            
+            gsap.to(card, {
+                duration: 0.8,
+                rotationY: card.classList.contains('flipped') ? 180 : 0,
+                rotationX: 0,
+                scale: 1,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    isAnimating = false; // Destrava após o giro
+                }
+            });
         });
     }
 
@@ -239,7 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const portfolioEngine = document.querySelector('.lks-portfolio-engine');
 
     if(thumbs.length > 0 && slides.length > 0 && portfolioEngine) {
-        
         thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 if(thumb.classList.contains('active')) return;
@@ -288,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Efeito Parallax sutil no fundo com o mouse
         portfolioEngine.addEventListener('mousemove', (e) => {
             const activeBg = document.querySelector('.portfolio-slide.active .slide-bg img');
             if(activeBg) {
@@ -318,33 +340,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const titles = item.querySelectorAll(".service-title");
         const content = item.querySelector(".accordion-content");
         const arrow = item.querySelector(".service-arrow");
-
         let isOpen = false;
 
         if (hoverImg) {
             gsap.set(hoverImg, { yPercent: -50, scale: 0.8, opacity: 0 });
         }
 
-        // Hover Effect
         item.addEventListener("mouseenter", () => {
-            if (hoverImg) {
-                gsap.to(hoverImg, { opacity: 0.8, scale: 1, duration: 0.6, ease: "power3.out", overwrite: "auto" });
-            }
+            if (hoverImg) { gsap.to(hoverImg, { opacity: 0.8, scale: 1, duration: 0.6, ease: "power3.out", overwrite: "auto" }); }
             gsap.to(titleWrap, { x: 20, duration: 0.6, ease: "power3.out", overwrite: "auto" });
             gsap.to(titles, { y: "-100%", duration: 0.5, ease: "power3.out", overwrite: "auto" });
             if(cursor) cursor.classList.add('magnet');
         });
 
         item.addEventListener("mouseleave", () => {
-            if (hoverImg) {
-                gsap.to(hoverImg, { opacity: 0, scale: 0.8, duration: 0.5, ease: "power3.out", overwrite: "auto" });
-            }
+            if (hoverImg) { gsap.to(hoverImg, { opacity: 0, scale: 0.8, duration: 0.5, ease: "power3.out", overwrite: "auto" }); }
             gsap.to(titleWrap, { x: 0, duration: 0.6, ease: "power3.out", overwrite: "auto" });
             gsap.to(titles, { y: "0%", duration: 0.5, ease: "power3.out", overwrite: "auto" });
             if(cursor) cursor.classList.remove('magnet');
         });
 
-        // Click Open/Close
         const header = item.querySelector(".accordion-header");
         if(header) {
             header.addEventListener("click", () => {
@@ -374,4 +389,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-});
+}); // FIM DO WINDOW.LOAD

@@ -193,6 +193,7 @@ body, html {
 .down-arrow-hint { position: absolute; bottom: 5vh; right: 10vw; font-size: 3rem; color: var(--accent); animation: bounce 2s infinite; }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
 
+
 /* ========================================== */
 /* A GALERIA INFINITA (Scroll Horizontal - DESKTOP) */
 /* ========================================== */
@@ -224,11 +225,6 @@ body, html {
     flex-shrink: 0; /* MÁGICA 2: Proíbe o navegador de esmagar o seu design */
 }
 
-.catalogue-number { font-family: 'Space Grotesk'; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 1.5rem; display: inline-block; border-bottom: 1px solid rgba(0, 230, 255, 0.3); padding-bottom: 5px; }
-.slide-title { font-family: 'Syncopate'; font-size: clamp(3rem, 5vw, 6rem); line-height: 1; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -2px; }
-.slide-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 1.3vw, 1.3rem); line-height: 1.8; color: #bbb; text-align: justify; }
-
-/* A largura do seu texto original mantida intacta */
 .slide-text { width: 40vw; max-width: 600px; }
 
 /* ========================================== */
