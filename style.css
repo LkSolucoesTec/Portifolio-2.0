@@ -96,11 +96,6 @@ body, html {
     box-shadow: 0 10px 30px rgba(0,0,0,0.9) !important;
 }
 
-/* Ajuste fino do "da" no mobile */
-@media (max-width: 900px) {
-    .hero h1 .word.da { font-size: 8vw; }
-    .hero h1 { font-size: 14vw; }
-}
 
 .nav-logo { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; color: #fff; position: relative; }
 .nav-logo:hover { animation: glitch-anim 0.3s infinite; }
@@ -131,7 +126,7 @@ body, html {
 /* ========================================== */
 /* HERO E TRANSIÇÕES */
 /* ========================================== */
-/* --- HERO BRUTALISTA --- */
+
 #scroll-content { will-change: transform; z-index: 2; position: relative; pointer-events: none;}
 #scroll-content * { pointer-events: auto; }
 
@@ -195,32 +190,62 @@ body, html {
 
 
 /* ========================================== */
-/* A GALERIA INFINITA (Scroll Horizontal - DESKTOP) */
+/* A GALERIA INFINITA (Scroll Horizontal LKS) */
 /* ========================================== */
-
 #lks-gallery-container { 
     width: 100vw; height: 100vh; position: relative; overflow: hidden; 
-    pointer-events: none !important; 
+    pointer-events: none !important; /* Vaza o clique pra rede neural */
 }
+
 .gallery-track { 
     display: flex; 
-    width: 500vw; 
+    width: max-content; /* MÁGICA 1: Evita o buraco negro no fim da tela */
     height: 100%; 
     pointer-events: none; 
-    flex-wrap: nowrap; /* MÁGICA 1: ADICIONE ISSO */
-}
-.gallery-slide { 
-    width: 100vw; 
-    height: 100vh; 
-    display: flex; 
-    align-items: center; justify-content: center; gap: 5vw; padding: 0 10vw; position: relative; pointer-events: none; 
-    flex-shrink: 0; /* MÁGICA 2: ADICIONE ISSO */
+    flex-wrap: nowrap; /* MÁGICA 2: Proíbe a carta de cair pro footer */
 }
 
-.slide-text { width: 40vw; max-width: 600px; }
+.gallery-slide { 
+    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; gap: 5vw; padding: 0 10vw; position: relative; pointer-events: none; 
+    flex-shrink: 0; /* MÁGICA 3: Proíbe o navegador de esmagar o design */
+}
+
+.catalogue-number { font-family: 'Space Grotesk'; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 1.5rem; display: inline-block; border-bottom: 1px solid rgba(0, 230, 255, 0.3); padding-bottom: 5px; pointer-events: auto;}
 
 /* ========================================== */
-/* O QUADRADO DA IMAGEM (Substitui o antigo slide-visual) */
+/* AS LETRAS GIGANTES E EFEITOS (RESTAURADOS) */
+/* ========================================== */
+.slide-title { 
+    font-family: 'Syncopate', sans-serif; 
+    font-size: clamp(3.5rem, 6vw, 7rem); /* Títulos GIGANTES */
+    line-height: 1; 
+    margin-bottom: 1.5rem; 
+    font-weight: 800; 
+    letter-spacing: -2px; 
+    pointer-events: auto;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/* Efeito Vazado (Outline) */
+.slide-title .text-outline { 
+    color: transparent; 
+    -webkit-text-stroke: 2px #fff; 
+}
+
+/* Efeito Neon Ciano */
+.slide-title .text-highlight { 
+    color: var(--accent); 
+    text-shadow: 0 0 20px rgba(0, 230, 255, 0.6); 
+}
+
+.slide-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 1.3vw, 1.3rem); line-height: 1.8; color: #bbb; text-align: justify; pointer-events: auto;}
+
+/* A largura do seu texto original mantida intacta */
+.slide-text { width: 40vw; max-width: 600px; pointer-events: auto !important;}
+
+/* ========================================== */
+/* O QUADRADO DA IMAGEM */
 /* ========================================== */
 .card {
     width: 35vw; /* Mesma largura do seu visual antigo */
@@ -259,35 +284,6 @@ body, html {
     transform: scale(1.05); /* Zoom interno suave */
 }
 
-/* ========================================== */
-/* RESPONSIVIDADE (Mobile & Tablets) */
-/* ========================================== */
-@media (max-width: 900px) {
-    .gallery-slide {
-        flex-direction: column; /* Empilha: Imagem em cima, texto embaixo */
-        gap: 3rem;
-        padding: 0 5vw;
-    }
-    
-    .card, .pokemon-card-stage {
-        width: 80vw; /* Aumenta o quadrado no celular */
-        max-width: 350px;
-        transform: perspective(1000px) rotateY(0deg); /* Tira a inclinação 3D para focar na imagem */
-    }
-    
-    .gallery-slide:hover .card {
-        transform: scale(1.02); /* Hover mais simples no mobile */
-    }
-
-    .slide-text {
-        width: 90vw; /* Texto ocupa a tela quase toda */
-        text-align: center; /* Centraliza tudo no celular para ficar bonito */
-    }
-
-    .slide-desc {
-        text-align: center; /* Centraliza o parágrafo no celular */
-    }
-}
 
 /* ========================================== */
 /* CARTA POKÉMON HOLOGRÁFICA (O FUNDADOR) */
@@ -1049,151 +1045,8 @@ body, html {
     100% { transform: translateX(0); }
 }
 
-/* ========================================== */
-/* 📱 BLINDAGEM MOBILE E CORREÇÕES FINAIS 📱 */
-/* ========================================== */
 
-/* --- FIX 1: LOOP INFINITO E VISÍVEL DAS FITAS --- */
-.tape-track {
-    display: flex;
-    width: max-content;
-}
-.tape-text {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: #000 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    white-space: nowrap;
-    padding-right: 15px;
-}
-.track-left { animation: scrollLeft 35s linear infinite; }
-.track-right { animation: scrollRight 35s linear infinite; }
 
-/* --- FIX 2: PORTFÓLIO ALINHADO E SEM SOMBRA BRANCA --- */
-.playground {
-    position: absolute;
-    width: 100%; 
-    height: 100%;
-    top: 0; left: 0;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    align-items: center;
-    z-index: 2;
-    pointer-events: none;
-}
-.bottomPosition { text-align: center; margin-bottom: 8vh; }
-.bottomPosition h1.special {
-    font-family: 'Syncopate', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: #fff; margin-bottom: 5px;
-    letter-spacing: 2px;
-    text-shadow: none !important;
-}
 
-/* ========================================== */
-/* 📱 MEDIA QUERIES (TUDO ABAIXO DE 900PX) 📱 */
-/* ========================================== */
-@media (max-width: 900px) {
-    
-    /* 1. MENU HAMBÚRGUER (Ícone Base) */
-    .nav-menu {
-        display: none !important; 
-    }
-    .cta-btn {
-        padding: 0.5rem 1rem !important; 
-        font-size: 0.75rem !important;
-        margin-right: 50px;
-    }
-    .menu-toggle {
-        display: block; position: absolute; right: 2rem; top: 50%;
-        transform: translateY(-50%); width: 30px; height: 30px;
-        cursor: pointer; z-index: 101;
-    }
-    .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after {
-        content: ''; display: block; background: var(--accent);
-        height: 2px; width: 100%; border-radius: 9999px; transition: all 0.3s ease;
-    }
-    .menu-toggle span::before { transform: translateY(-8px); }
-    .menu-toggle span::after { transform: translateY(6px); }
 
-    /* --- O MENU ABERTO (Drop-down Brutalista) --- */
-    .nav-menu.active {
-        display: flex !important;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; 
-        left: 0;
-        width: 100vw;
-        background: rgba(3, 3, 3, 0.98); 
-        backdrop-filter: blur(15px);
-        padding: 2rem 0 3rem 0;
-        border-bottom: 1px solid rgba(0, 230, 255, 0.3); 
-        align-items: center;
-        gap: 2rem;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-        z-index: 100;
-    }
-    .nav-menu.active .nav-link {
-        font-size: 1.2rem;
-        letter-spacing: 2px;
-    }
 
-    /* --- ANIMAÇÃO DO 'X' --- */
-    .menu-toggle.active span { background: transparent; } 
-    .menu-toggle.active span::before { transform: translateY(0) rotate(45deg); }
-    .menu-toggle.active span::after { transform: translateY(0) rotate(-45deg); }
-
-    
-    /* 1. DESTRAVA A GALERIA (Permite rolar pra baixo) */
-    #lks-gallery-container {
-        height: auto !important;
-        overflow: visible !important; /* Tira o bloqueio de altura */
-    }
-
-    /* 2. MATA A ROLAGEM HORIZONTAL E EMPILHA */
-    .gallery-track {
-        display: flex !important;
-        flex-direction: column !important; /* Coloca um embaixo do outro */
-        width: 100vw !important; /* Reseta a largura absurda de 500vw */
-        height: auto !important;
-        transform: none !important; /* Mata a animação do Javascript horizontal */
-    }
-
-    /* 3. ARRUMA CADA SLIDE INDIVIDUALMENTE */
-    .gallery-slide {
-        flex-direction: column !important; /* Imagem em cima, texto embaixo */
-        gap: 3rem;
-        padding: 5rem 5vw !important;
-        height: auto !important;
-        min-height: 100vh; /* Cada slide pega no mínimo 1 tela de altura */
-        
-        /* Blindagem contra slides fantasmas (sumiço) */
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important; 
-    }
-    
-    /* 4. AJUSTA O QUADRADO (CARD) */
-    .card, .pokemon-card-stage {
-        width: 80vw !important; 
-        max-width: 350px !important;
-        transform: perspective(1000px) rotateY(0deg) !important; /* Desliga o 3D pra ficar limpo */
-    }
-    
-    .gallery-slide:hover .card {
-        transform: scale(1.02) !important;
-    }
-
-    /* 5. AJUSTA O TEXTO */
-    .slide-text {
-        width: 90vw !important; 
-        text-align: center !important; 
-    }
-
-    .slide-desc {
-        text-align: center !important; 
-    }
-}

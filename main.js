@@ -75,28 +75,7 @@ window.addEventListener("load", () => {
         nav.style.transform = `translateX(-50%) perspective(1000px) rotateX(${-clamp(rx, -10, 10)}deg) rotateY(${clamp(ry, -10, 10)}deg)`;
     });
 
-    // ==========================================
-    // 3. MENU HAMBÚRGUER CLICÁVEL (MOBILE)
-    // ==========================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                }
-            });
-        });
-    }
-
+    
     // ==========================================
     // 4. MOTOR UNIFICADO GSAP (SKEW + FITAS + GALERIA)
     // ==========================================
@@ -171,21 +150,8 @@ window.addEventListener("load", () => {
                 requestAnimationFrame(scrollLoop);
             }
             scrollLoop();
-
-            // Cleanup ao ir para mobile
-            return () => { 
-                skew = 0; 
-                if(scrollContent) scrollContent.style.transform = `skewY(0deg)`; 
-            };
-        });
-
-        // [MOBILE] <= 900px
-        mm.add("(max-width: 900px)", () => {
-            // Mantém apenas as fitas rodando leve no mobile
-            if (tapeLRText && tapeRLText) {
-                gsap.to(tapeLRText, { x: "0%", duration: 45, repeat: -1, ease: "none" });
-                gsap.to(tapeRLText, { x: "-100%", duration: 50, repeat: -1, ease: "none" });
-            }
+       
+        
         });
     }
 
@@ -401,4 +367,4 @@ window.addEventListener("load", () => {
         });
     }
 
-}); // FIM DO WINDOW.LOAD
+}); 
