@@ -925,6 +925,202 @@ body, html {
 #lks-modern-btn .modern-arrow { width: 28px !important; height: 28px !important; }
 
 /* ========================================== */
+/* 🔮 CSS MODAL SKEWED CONTACT LKS - REFINADO */
+/* ========================================== */
+
+/* Fundo escuro desfocado - ✅ CENTRALIZAÇÃO VERTICAL GARANTIDA */
+.lks-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex; 
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* ✅ CENTRALIZA VERTICALMENTE */
+    z-index: 999990;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease;
+    overflow-y: auto;        /* Permite rolar internamente se for maior que a tela */
+    padding: 40px;          /* Espaçamento para o modal não grudar nas bordas */
+}
+.lks-modal-overlay.active {
+    opacity: 1; pointer-events: auto;
+}
+
+/* O Container Inclinado (A vibe do card) */
+.lks-slanted-box {
+    position: relative;
+    width: 100%; max-width: 500px;
+    display: flex; justify-content: center; align-items: center;
+    transition: 0.5s;
+    transform: translateY(30px) scale(0.9); /* Transform de entrada sutil */
+    margin: auto;           /* Ajuste final de centralização Flexbox */
+}
+.lks-modal-overlay.active .lks-slanted-box {
+    transform: translateY(0) scale(1);
+}
+
+/* 🎨 PALETA DE AZUIS CIANO (As formas de fundo inclinadas) */
+.lks-slanted-box::before,
+.lks-slanted-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 50%;
+    height: 100%;
+    border-radius: 8px;
+    /* Inclinado quando inativo */
+    transform: skewX(15deg); 
+    transition: 0.6s cubic-bezier(0.8, 0.2, 0.1, 1);
+    background: linear-gradient(315deg, #002233, #00e6ff); /* Tons de Azul Ciano LKS */
+}
+
+.lks-slanted-box::after {
+    filter: blur(30px); /* O brilho radiante */
+    opacity: 0.5;
+}
+
+/* 🔥 O ESTADO ATIVO DO MODAL: A forma de fundo endireita */
+.lks-slanted-box:hover::before,
+.lks-slanted-box:hover::after,
+.lks-modal-overlay.active .lks-slanted-box::before,
+.lks-modal-overlay.active .lks-slanted-box::after {
+    transform: skewX(0deg);
+    left: 20px;
+    width: calc(100% - 40px);
+    opacity: 1;
+}
+
+/* Botão Fechar */
+.lks-close-btn {
+    position: absolute; top: -30px; right: -20px;
+    background: transparent; border: none;
+    color: #fff; font-size: 2.5rem;
+    cursor: pointer; z-index: 10;
+    transition: all 0.3s;
+}
+.lks-close-btn:hover { color: #00e6ff; text-shadow: 0 0 10px #00e6ff; transform: rotate(90deg); }
+
+/* Partículas de vidro flutuantes - ✅ MOVIDAS PARA OS LADOS */
+.lks-slanted-box span {
+    display: block; position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 5; pointer-events: none;
+}
+.lks-slanted-box span::before,
+.lks-slanted-box span::after {
+    content: '';
+    position: absolute;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 230, 255, 0.1);
+    opacity: 0;
+    transition: 0.5s;
+    animation: floatCards 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    top: 50%;                 /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajuste final de centralização vertical */
+}
+@keyframes floatCards { 0%, 100% { transform: translateY(-50%) translateY(10px); } 50% { transform: translateY(-50%) translate(-10px); } }
+
+/* ✅ span::before -> Move para a esquerda do modal */
+.lks-slanted-box span::before {
+    left: -60px;
+    width: 0; height: 0;
+}
+/* ✅ span::after -> Move para a direita do modal */
+.lks-slanted-box span::after {
+    right: -60px;
+    width: 100%; height: 100%; animation-delay: -1s;
+}
+
+/* Revela e move as partículas no hover do box */
+.lks-slanted-box:hover span::before {
+    top: 50%;                 /* Mantém centralizado */
+    left: -100px;             /* Afasta mais para a esquerda */
+    width: 80px; height: 80px;
+    opacity: 1;
+}
+.lks-slanted-box:hover span:after {
+    top: 50%;                 /* Mantém centralizado */
+    right: -100px;            /* Afasta mais para a direita */
+    width: 80px; height: 80px;
+    opacity: 1;
+}
+
+/* O Cartão de Vidro Central (Onde está o formulário) */
+.lks-contact-content {
+    position: relative;
+    padding: 30px 40px;
+    background: rgba(0, 10, 15, 0.7); /* Vidro escuro */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 230, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    z-index: 1;
+    transition: 0.5s;
+    color: #fff;
+    width: 100%;
+}
+
+/* Efeito 3D no Hover do cartão principal */
+.lks-slanted-box:hover .lks-contact-content,
+.lks-modal-overlay.active .lks-contact-content {
+    border-color: rgba(0, 230, 255, 0.4);
+    background: rgba(0, 10, 15, 0.8);
+}
+
+/* Estilo do Formulário Interno (Brutalista LKS) */
+.modal-title { font-family: 'Syncopate', sans-serif; color: #fff; font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; }
+.modal-desc { color: #888; font-size: 0.8rem; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+.input-group { margin-bottom: 12px; }
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 10px 15px;
+    color: #00e6ff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.input-group select { appearance: none; cursor: pointer; color: #888; }
+.input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+    border-color: #00e6ff; box-shadow: 0 0 15px rgba(0, 230, 255, 0.2); color: #fff;
+}
+.submit-btn { width: 100%; margin-top: 10px; border-radius: 4px; font-size: 0.85rem;}
+
+/* ✅ CORREÇÃO DAS CORES DO SELECT (DROPDOWN) */
+.input-group select option {
+    background-color: rgba(0, 10, 15, 0.9); /* Mesma cor de vidro escuro do modal */
+    color: #00e6ff; /* Ciano Neon */
+    font-family: 'Space Mono', monospace;
+    padding: 10px; /* Espaçamento interno */
+}
+
+/* ========================================== */
+/* 🎬 ANIMAÇÕES DE ENVIO E SUCESSO (CIANO)Permanecem as mesmas */
+/* ========================================== */
+.hidden { display: none !important; }
+#lks-success-content-v2 { text-align: center; padding: 2rem 0; }
+.sending-spinner {
+    width: 50px; height: 50px; border: 3px solid rgba(0, 230, 255, 0.2); border-top-color: #00e6ff; border-radius: 50%;
+    margin: 0 auto 20px auto; animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.checkmark { width: 80px; height: 80px; border-radius: 50%; stroke-width: 3; stroke: #00e6ff; margin: 0 auto 20px auto; }
+.checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 3; stroke: #00e6ff; fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
+.checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards; }
+@keyframes stroke { 100% { stroke-dashoffset: 0; } }
+.success-title { font-family: 'Syncopate', sans-serif; color: #fff; margin-bottom: 10px; font-size: 1.1rem; }
+.success-text { color: #aaa; font-size: 0.9rem; font-family: 'Inter', sans-serif; }
+
+
+/* ========================================== */
 /* REDES SOCIAIS (AURA STYLE - LKS PURE CSS) */
 /* ========================================== */
 .social-cta-section {

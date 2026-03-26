@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKS - Transmissão Concluída</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #030303;
+            /* 👇 O SEU FUNDO DO LEONARDO AI AQUI 👇 */
+            background-image: url(assets/bg-obrigado.jpg); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; width: 100vw;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Camada escura pra dar contraste */
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); z-index: 1;
+        }
+
+        /* O Terminal de Vidro (Vibe do nosso pop-up) */
+        .glass-panel {
+            position: relative; z-index: 2;
+            background: rgba(0, 20, 25, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 230, 255, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            width: 90%; max-width: 550px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0, 230, 255, 0.1);
+            animation: panelFadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes panelFadeIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* O Checkmark Neon */
+        .success-icon { width: 100px; height: 100px; margin: 0 auto 30px auto; }
+        .checkmark { width: 100px; height: 100px; border-radius: 50%; stroke-width: 3; stroke: #00e6ff; }
+        .checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 3; fill: none; animation: stroke 0.6s 0.2s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
+        .checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke 0.3s 0.8s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
+        @keyframes stroke { 100% { stroke-dashoffset: 0; } }
+
+        /* Textos Brutalistas */
+        .title { color: #fff; font-size: 1.6rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+        
+        .message { color: #aaa; font-size: 0.95rem; margin-bottom: 40px; line-height: 1.6; }
+        .message strong { color: #00e6ff; }
+
+        /* O Botão de Voltar (Estilo LKS Moderno) */
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(0, 230, 255, 0.1);
+            border: 1px solid #00e6ff;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 230, 255, 0.2);
+        }
+
+        .back-btn:hover {
+            background: #00e6ff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 230, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glass-panel">
+        
+        <div class="success-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+
+        <h1 class="title">Transmissão Recebida<span class="blink">_</span></h1>
+        <p class="message">
+            O pacote de dados foi criptografado e entregue com sucesso à central.<br>
+            A equipe da <strong>LKS Soluções Tecnológicas</strong> entrará em contato em breve.
+        </p>
+
+        <a href="index.html" class="back-btn">REINICIAR INTERFACE</a>
+    </div>
+
+</body>
+</html>

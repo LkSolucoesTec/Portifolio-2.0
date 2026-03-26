@@ -297,7 +297,7 @@
                             <div class="stack-item"><p>Node</p></div>
                             <div class="stack-item"><p>API</p></div>
                         </div>
-                        <a href="#" class="view-project-btn magnetic"><span>ACESSAR SISTEMA</span></a>
+                        <a href="#" class="view-project-btn magnetic"><span>PROJETO PARTICULAR</span></a>
                     </div>
                 </div>
 
@@ -662,7 +662,7 @@
             <h2 class="massive-text text-muted">PARA NOSSA MESA</h2>
             <h2 class="massive-text text-muted">DE OPERAÇÕES</h2>
             
-            <a href="mailto:lkssoltech@gmail.com?subject=Iniciando%20Projeto%20-%20LKS%20Foundry" id="lks-modern-btn" class="modern-btn-group magnetic">
+           <a href="javascript:void(0)" onclick="document.getElementById('lks-contact-modal').classList.add('active'); document.body.style.overflow='hidden';" id="lks-modern-btn" class="modern-btn-group magnetic open-contact-modal">
                 <div class="modern-aura-glow"></div>
                 <div class="modern-border-wrap"><div class="modern-border-spin"></div></div>
                 <div class="modern-btn-inner">
@@ -679,8 +679,6 @@
                 </div>
                 <div class="modern-internal-glow"></div>
             </a>
-        </div>
-    </section>
 
     <section id="redes-sociais" class="social-cta-section">
         <div class="social-container">
@@ -773,9 +771,51 @@
         </div>
     </footer>
 
+   <div id="lks-contact-modal" class="lks-modal-overlay">
+        <div class="lks-slanted-box">
+            
+            <button id="lks-close-modal" class="lks-close-btn">&times;</button>
+            <span></span>
+
+            <div class="lks-contact-content">
+                <div id="lks-form-content-v2">
+                    <h2 class="modal-title">INICIAR TRANSMISSÃO <span class="blink">_</span></h2>
+                    <p class="modal-desc">Insira seus dados para enviar sua mensagem para a central LKS.</p>
+                    
+                    <form id="lks-contact-form-v2" action="https://formspree.io/f/xbdpjezp" method="POST">
+                        <div class="input-group">
+                            <input type="text" id="nome-v2" name="nome" placeholder="NOME IDENTIFICADOR" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email-v2" name="email" placeholder="E-MAIL DE CONTATO" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="telefone-v2" name="telefone" placeholder="TELEFONE / WHATSAPP" required>
+                        </div>
+                        <div class="input-group">
+                            <select id="projeto-v2" name="projeto" required>
+                                <option value="" disabled selected>SELECIONE O TIPO DE PROJETO</option>
+                                <option value="Agentes de IA">Agentes de Inteligência Artificial</option>
+                                <option value="Micro SaaS">Desenvolvimento de Micro SaaS</option>
+                                <option value="Web Site">Web Site de Alta Performance</option>
+                                <option value="Automação">Automação de Processos</option>
+                                <option value="Outros">Outros Assuntos</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="mensagem-v2" name="mensagem" rows="3" placeholder="MOTIVO DO CONTATO..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-btn submit-btn"><span>ENVIAR PACOTE DE DADOS</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="main.js"></script>
+    <script src="main.js?v=2"></script>
     <script type="module" src="particle-text.js"></script>
 
 </body>

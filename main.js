@@ -498,4 +498,42 @@ if (document.readyState === 'loading') {
         });
     }
 
+// ==========================================================
+// 📨 LÓGICA DO MODAL DE CONTATO (VERSÃO ESTÁVEL NATIVA)
+// ==========================================================
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const modal = document.getElementById('lks-contact-modal');
+    const closeBtn = document.getElementById('lks-close-modal');
+
+    // Se o modal não existir na página, não faz nada
+    if (!modal) return;
+
+    // 1. Abrir o Modal ao clicar nos botões de contato
+    const openBtns = document.querySelectorAll('.open-contact-modal');
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); // Impede a tela de pular pro topo
+            modal.classList.add('active');
+        });
+    });
+
+    // 2. Fechar o Modal
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Fecha se clicar no fundo escuro fora do vidro
+    modal.addEventListener('click', (e) => { 
+        if (e.target === modal) closeModal(); 
+    });
+
+    // NOTA: Não há interceptação de envio aqui. 
+    // Quando o usuário clicar em "Enviar", o HTML nativo assume e leva para o Formspree.
+});
+
 }); 
