@@ -1,7 +1,138 @@
-// OBRIGATÓRIO: window.load garante que o GSAP só calcule as distâncias
-// DEPOIS que todas as imagens pesadas do site terminarem de baixar.
-window.addEventListener("load", () => {
+// ==========================================
+// 🛡️ O EXECUTOR JS (Blindagem de Dois Mundos)
+// ==========================================
+function enforceTwoWorlds() {
+    const desktop = document.getElementById('lks-desktop');
+    const mobile = document.getElementById('lks-mobile');
     
+    if (window.innerWidth > 900) {
+        // MODO DESKTOP (PC / Monitor) - Esmaga o Mobile
+        if(mobile) mobile.style.setProperty('display', 'none', 'important');
+        if(desktop) desktop.style.setProperty('display', 'block', 'important');
+    } else {
+        // MODO MOBILE (Celular) - Esmaga o Desktop
+        if(desktop) desktop.style.setProperty('display', 'none', 'important');
+        if(mobile) mobile.style.setProperty('display', 'block', 'important');
+    }
+}
+
+// Roda a verificação assim que o site carrega
+enforceTwoWorlds();
+// Roda a verificação se o usuário redimensionar a janela
+window.addEventListener('resize', enforceTwoWorlds);
+
+window.addEventListener("load", () => {
+
+  
+// ==========================================
+// 🌌 MOTOR LKS MATRIX V2 - DIRECTOR'S CUT (7.5 Segundos)
+// ==========================================
+function iniciarMatrixLKS() {
+    const preloader = document.getElementById('lks-preloader-v2');
+    const canvas = document.getElementById('lks-canvas-v2');
+    const texto = document.getElementById('lks-texto-v2');
+
+    if (!preloader || !canvas || !texto) return;
+    if (window.innerWidth <= 900) {
+        preloader.style.display = 'none';
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    // 🎥 AÇÃO 1: Inicia o Zoom lento da logo central imediatamente
+    setTimeout(() => {
+        texto.parentElement.classList.add('zooming');
+    }, 100);
+
+    // 🎥 AÇÃO 2: CHUVA DE CÓDIGO (Letras Gigantes e Bolds)
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*".split('');
+    const fontSize = 28; // LETRAS MUITO MAIORES (Antes era 16)
+    const columns = Math.floor(width / fontSize);
+    const drops = [];
+    for (let i = 0; i < columns; i++) drops[i] = 1;
+
+    let rainInterval = setInterval(() => {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.15)"; // Fundo um pouco mais escuro para as letras grandes não borrarem
+        ctx.fillRect(0, 0, width, height);
+        
+        ctx.fillStyle = "#00e6ff"; 
+        ctx.font = "bold " + fontSize + "px 'Space Mono', monospace"; // Fonte Bold e Monospace igual a do centro
+
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > height && Math.random() > 0.95) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }, 50); // Velocidade da chuva
+
+    // 🎥 AÇÃO 3: A ROLETA DE TEXTO LENTA
+    let fase = 0;
+    let glitchInterval = setInterval(() => {
+        let r1 = chars[Math.floor(Math.random() * chars.length)];
+        let r2 = chars[Math.floor(Math.random() * chars.length)];
+        let r3 = chars[Math.floor(Math.random() * chars.length)];
+
+        if (fase === 0) texto.innerText = `[ ${r1} ${r2} ${r3} ]`;
+        else if (fase === 1) texto.innerText = `[ L ${r2} ${r3} ]`;
+        else if (fase === 2) texto.innerText = `[ L K ${r3} ]`;
+    }, 60);
+
+    // 🎥 AÇÃO 4: A LINHA DO TEMPO ÉPICA (7.5 Segundos Totais)
+    
+    // 2.0 Segundos: Trava a Letra L
+    setTimeout(() => { fase = 1; }, 2000); 
+    
+    // 3.5 Segundos: Trava a Letra K
+    setTimeout(() => { fase = 2; }, 3500); 
+    
+    // 5.0 Segundos: Trava a Letra S e dá o brilho máximo
+    setTimeout(() => { 
+        fase = 3; 
+        clearInterval(glitchInterval);
+        texto.innerText = `[ L K S ]`; 
+        texto.parentElement.classList.add('lks-brilho-maximo'); 
+        
+        // 6.5 Segundos: A Tela entra em colapso (Glitch)
+        setTimeout(() => {
+            preloader.classList.add('screen-glitch');
+            
+            // 6.9 Segundos: Desliga a TV de Tubo
+            setTimeout(() => {
+                preloader.classList.remove('screen-glitch');
+                preloader.classList.add('tv-off-effect');
+                
+                // 7.5 Segundos: A tela some do código e revela o site!
+                setTimeout(() => {
+                    clearInterval(rainInterval); 
+                    preloader.style.display = 'none'; 
+                }, 600); // Tempo do efeito da TV terminar
+                
+            }, 400); // Duração do Glitch
+            
+        }, 1500); // Fica mostrando LKS brilhando por 1.5s antes de dar a pane
+        
+    }, 5000);
+}
+
+// Inicializador blindado
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarMatrixLKS);
+} else {
+    iniciarMatrixLKS();
+}
+        
     // ==========================================
     // 1. CURSOR MAGNÉTICO E HACKER TEXT
     // ==========================================

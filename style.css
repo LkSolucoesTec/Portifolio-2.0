@@ -1,31 +1,113 @@
 /* ========================================== */
-/* 🛡️ O KILL SWITCH ABSOLUTO (DOIS MUNDOS) */
+/* 🛡️ TRAVA ABSOLUTA DE MUNDOS (FIM DO ARQUIVO) */
 /* ========================================== */
 
-/* 1. NO COMPUTADOR: O Mobile NÃO EXISTE */
-#lks-mobile {
-    display: none !important;
+/* 1. MODO DESKTOP ESTRITO (Acima de 900px) */
+@media screen and (min-width: 901px) {
+    #lks-mobile { 
+        display: none !important; 
+        visibility: hidden !important; 
+        opacity: 0 !important; 
+        height: 0 !important; 
+        overflow: hidden !important; 
+        pointer-events: none !important;
+    }
+    #lks-desktop { display: block !important; }
 }
 
-/* 2. NO CELULAR (Telas menores que 900px) */
-@media (max-width: 900px) {
-    
-    /* O Desktop NÃO EXISTE no touch */
-    #lks-desktop {
-        display: none !important;
-    }
-    
-    /* Desliga a bolinha do mouse que buga o touch */
-    #cursor {
+/* 2. MODO MOBILE ESTRITO (Até 900px) */
+@media screen and (max-width: 900px) {
+    #lks-desktop { 
         display: none !important; 
+        visibility: hidden !important; 
+        opacity: 0 !important; 
+        height: 0 !important; 
+        overflow: hidden !important; 
+        pointer-events: none !important;
     }
-    
-    /* O Tanque Mobile DESPERTA */
-    #lks-mobile {
-        display: block !important;
-        width: 100vw;
-        overflow-x: hidden;
-    }
+    #lks-mobile { display: block !important; width: 100vw; overflow-x: hidden; }
+    #cursor { display: none !important; }
+}
+
+
+/* ========================================== */
+/* 🌌 CSS LKS MATRIX V2 - DIRECTOR'S CUT */
+/* ========================================== */
+#lks-preloader-v2 {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #030303;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    overflow: hidden;
+    transform-origin: center;
+}
+
+#lks-canvas-v2 {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.lks-caixa-texto {
+    position: relative;
+    z-index: 2;
+    font-family: 'Space Mono', monospace, sans-serif;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    color: #00e6ff;
+    letter-spacing: 6px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 230, 255, 0.6);
+    transform: scale(0.8); /* Começa um pouco menor */
+    transition: transform 7s linear; /* ZOOM MUITO LENTO E CONTÍNUO */
+}
+
+/* A classe que o JS vai injetar para a caixa vir crescendo */
+.lks-caixa-texto.zooming {
+    transform: scale(1.6); /* Termina gigante */
+}
+
+/* O brilho final de Acesso Concedido */
+.lks-brilho-maximo {
+    color: #ffffff !important;
+    text-shadow: 0 0 20px #00e6ff, 0 0 40px #00e6ff, 0 0 80px #00e6ff !important;
+}
+
+/* ========================================== */
+/* 🎬 EFEITOS ESPECIAIS (GLITCH & TV OFF) */
+/* ========================================== */
+
+/* 1. O Glitch Total (A tela pane) */
+@keyframes screenGlitch {
+    0% { filter: contrast(1); transform: translateX(0); }
+    20% { filter: contrast(3) hue-rotate(90deg) invert(1); transform: translateX(-10px); }
+    40% { filter: contrast(1); transform: translateX(10px); }
+    60% { filter: contrast(3) hue-rotate(-90deg) invert(1); transform: translateX(-5px); }
+    80% { filter: contrast(1); transform: translateX(5px); }
+    100% { filter: contrast(1); transform: translateX(0); }
+}
+.screen-glitch {
+    animation: screenGlitch 0.3s infinite;
+}
+
+/* 2. O Desligamento da TV de Tubo (Efeito clássico) */
+@keyframes tvOff {
+    0% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
+    40% { transform: scale(1, 0.005); opacity: 1; filter: brightness(10); background-color: #fff; } /* Esmaga no eixo Y e vira uma linha branca */
+    70% { transform: scale(0, 0.005); opacity: 1; filter: brightness(10); background-color: #fff; } /* A linha encolhe pro centro */
+    100% { transform: scale(0, 0); opacity: 0; filter: brightness(0); } /* Apaga tudo */
+}
+.tv-off-effect {
+    animation: tvOff 0.6s cubic-bezier(0.8, 0.2, 0.1, 1) forwards;
+}
+
+/* Oculta no celular direto no CSS */
+@media (max-width: 900px) {
+    #lks-preloader-v2 { display: none !important; }
 }
 
 /* ========================================== */
