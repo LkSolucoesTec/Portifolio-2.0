@@ -1,28 +1,30 @@
 /* ========================================== */
-/* O "KILL SWITCH" DOS DOIS MUNDOS LKS */
+/* 🛡️ O KILL SWITCH ABSOLUTO (DOIS MUNDOS) */
 /* ========================================== */
 
-/* Padrão: Esconde o Mobile */
+/* 1. NO COMPUTADOR: O Mobile NÃO EXISTE */
 #lks-mobile {
-    display: none;
+    display: none !important;
 }
 
-/* Quando a tela for menor que 900px (Celulares e Tablets) */
+/* 2. NO CELULAR (Telas menores que 900px) */
 @media (max-width: 900px) {
-    /* Desliga a Ferrari */
+    
+    /* O Desktop NÃO EXISTE no touch */
     #lks-desktop {
         display: none !important;
     }
+    
+    /* Desliga a bolinha do mouse que buga o touch */
     #cursor {
-        display: none !important; /* Desliga o cursor hacker no touch */
+        display: none !important; 
     }
     
-    /* Liga o Tanque Blindado */
+    /* O Tanque Mobile DESPERTA */
     #lks-mobile {
-        display: block;
+        display: block !important;
         width: 100vw;
-        min-height: 100vh;
-        background-color: var(--bg);
+        overflow-x: hidden;
     }
 }
 
